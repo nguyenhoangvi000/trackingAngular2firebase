@@ -1,37 +1,47 @@
-<md-sidenav-container fullscreen>
+<md-toolbar color="primary">
+  <button md-icon-button (click)="start.open()">
+      <md-icon md-font-set="material-icons">menu</md-icon>
+    </button> Giám sát hành trình
+</md-toolbar>
+<md-sidenav-container>
   <md-sidenav #start>
     <md-nav-list>
-      <a md-list-item>Home</a>
-      <a md-list-item>About</a>
+      <a md-list-item><span><md-icon>directions</md-icon>&emsp;&emsp;<strong>Location Tracking</strong></span></a>
+
+      <hr/>
+      <a md-list-item>
+        <span><md-icon>home</md-icon>&emsp;&emsp;Trang chủ</span>
+      </a>
+      <a md-list-item>
+        <span><md-icon>directions_car</md-icon>&emsp;&emsp;Tài xế</span>
+      </a>
+      <a md-list-item>
+        <span><md-icon>help</md-icon>&emsp;&emsp;About</span>
+      </a>
+      <hr/>
+      <a md-list-item (click)="start.close()"><span><md-icon>close</md-icon>&emsp;&emsp;Close</span></a>
     </md-nav-list>
     <hr>
-    <button md-button (click)="start.close()">Close</button>
   </md-sidenav>
-  <md-toolbar color="primary">
-    <button md-icon-button (click)="start.open()">
-      <md-icon md-font-set="material-icons">menu</md-icon>
-    </button> Location Tracking
-  </md-toolbar>
-  <div class="main-content">
-    <md-card class="example-card">
-      <md-card-header>
-        <h2>Lộ trình</h2>
-      </md-card-header>
-      <md-card-content>
-        <md-select placeholder="Danh sách xe">
-          <md-option>Tài xế 1</md-option>
-          <md-option>Tài xế 2</md-option>
-        </md-select>
-        <sebm-google-map [latitude]="currentLat" [longitude]="currentLng" [zoom]="15">
-          <sebm-google-map-polyline [strokeWeight]="'10'" [strokeColor]="'#B71C1C'">
-            <sebm-google-map-polyline-point *ngFor="let geolocationCurrent of geolocationCurrents|async" [latitude]="geolocationCurrent.lat"
-              [longitude]="geolocationCurrent.lng">
-            </sebm-google-map-polyline-point>
-          </sebm-google-map-polyline>
-        </sebm-google-map>
-      </md-card-content>
-    </md-card>
-  </div>
+
+  <md-card class="example-card">
+    <md-card-header>
+      <h2>Lộ trình</h2>
+    </md-card-header>
+    <md-card-content>
+      <md-select placeholder="Danh sách xe">
+        <md-option>Tài xế 1</md-option>
+        <md-option>Tài xế 2</md-option>
+      </md-select>
+      <sebm-google-map [latitude]="currentLat" [longitude]="currentLng" [zoom]="15">
+        <sebm-google-map-polyline [strokeWeight]="'10'" [strokeColor]="'#B71C1C'">
+          <sebm-google-map-polyline-point *ngFor="let geolocationCurrent of geolocationCurrents|async" [latitude]="geolocationCurrent.lat"
+            [longitude]="geolocationCurrent.lng">
+          </sebm-google-map-polyline-point>
+        </sebm-google-map-polyline>
+      </sebm-google-map>
+    </md-card-content>
+  </md-card>
 </md-sidenav-container>
 
 

@@ -10,11 +10,15 @@ import { firebaseConfig } from './../environments/firebase.config';
 import { MaterialModule } from '@angular/material';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import 'hammerjs';
+import { DriverComponent } from './driver/driver.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DriverComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
