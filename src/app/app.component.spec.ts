@@ -2,6 +2,10 @@
 
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+
+
+
 
 describe('AppComponent', () => {
   beforeEach(() => {

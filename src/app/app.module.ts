@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
@@ -12,14 +13,17 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
 import 'hammerjs';
 import { DriverComponent } from './driver/driver.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { MapComponent } from './map/map.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DriverComponent,
-    SidenavComponent
+    SidenavComponent,
+    MapComponent
   ],
+
   imports: [
     BrowserModule,
     FormsModule,
