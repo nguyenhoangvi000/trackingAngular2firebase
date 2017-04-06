@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { SebmGoogleMap, SebmGoogleMapPolygon, LatLngLiteral } from 'angular2-google-maps/core';
@@ -15,14 +15,11 @@ export class AppComponent {
 
   // currentLat: number;
   // currentLng: number;
+  private viewContainerRef: ViewContainerRef;
+  constructor(private af: AngularFire, viewContainerRef: ViewContainerRef) {
 
-  constructor(private af: AngularFire) {
-    // this.geolocationCurrents = af.database.list('/geolocationCurrents')
-    // navigator.geolocation.watchPosition((position) => {
-    //   this.currentLat = position.coords.latitude;
-    //   this.currentLng = position.coords.longitude;
-    //   console.log(this.currentLat + ":" + this.currentLng);
-    // })
+    // You need this small hack in order to catch application root view container ref
+    this.viewContainerRef = viewContainerRef;
 
   }
 

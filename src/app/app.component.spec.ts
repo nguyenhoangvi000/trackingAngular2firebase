@@ -2,7 +2,7 @@
 
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
+import { SidenavComponent } from './dashboard/sidenav/sidenav.component';
 
 
 
