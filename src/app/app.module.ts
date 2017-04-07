@@ -14,6 +14,8 @@ import { MaterialModule } from '@angular/material';
 import { MdDataTableModule } from 'ng2-md-datatable';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import 'hammerjs';
+
+import { LoginComponent } from "./login/login.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { DriverComponent } from './dashboard/driver/driver.component';
 import { SidenavComponent } from './dashboard/sidenav/sidenav.component';
@@ -24,13 +26,13 @@ import { TopnavComponent } from './dashboard/topnav/topnav.component';
 
 import { routes } from './app.routes';
 
-
 @NgModule({
   declarations: [
     AppComponent,
     DriverComponent,
     SidenavComponent,
     MapComponent,
+    LoginComponent,
     DashboardComponent,
     AboutComponent,
     TopnavComponent

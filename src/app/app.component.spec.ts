@@ -5,8 +5,6 @@ import { AppComponent } from './app.component';
 import { SidenavComponent } from './dashboard/sidenav/sidenav.component';
 
 
-
-
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
