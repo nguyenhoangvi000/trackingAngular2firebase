@@ -10,12 +10,15 @@ import { SebmGoogleMap, SebmGoogleMapPolygon, LatLngLiteral } from 'angular2-goo
 export class MapComponent implements OnInit {
 
   geolocationCurrents: FirebaseListObservable<any[]>;
+  driverCurrents: FirebaseListObservable<any[]>;
 
   currentLat: number;
   currentLng: number;
 
   constructor(private af: AngularFire) {
     this.geolocationCurrents = af.database.list('/geolocationCurrents')
+
+    this.driverCurrents = af.database.list('/drivers');
     navigator.geolocation.watchPosition((position) => {
       this.currentLat = position.coords.latitude;
       this.currentLng = position.coords.longitude;

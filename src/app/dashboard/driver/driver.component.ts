@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 @Component({
   selector: 'app-driver',
@@ -7,10 +8,10 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 })
 export class DriverComponent implements OnInit {
 
-  constructor(public dialog: MdDialog) { }
+  constructor(public dialog: MdDialog, af: AngularFire) { }
 
-  openDialog(){
-    let dialogRef=this.dialog.open(DialogResultExampleDialog);
+  openDialog() {
+    let dialogRef = this.dialog.open(DialogResultExampleDialog);
   }
 
   ngOnInit() {
@@ -23,5 +24,5 @@ export class DriverComponent implements OnInit {
   // templateUrl: './driver.component.html',
 })
 export class DialogResultExampleDialog {
-  constructor(public dialogRef: MdDialogRef<DialogResultExampleDialog>) {}
+  constructor(public dialogRef: MdDialogRef<DialogResultExampleDialog>) { }
 }
