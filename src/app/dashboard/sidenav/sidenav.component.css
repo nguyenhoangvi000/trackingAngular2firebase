@@ -1,5 +1,9 @@
 .router-card{
-    height: 550px;
-    width: 1020px;
+    height: 100%;
+    width: 80%;
     float: right;
+}
+
+.side-nav-container{
+    height: 85%;
 }
