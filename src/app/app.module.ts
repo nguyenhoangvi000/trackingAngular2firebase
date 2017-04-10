@@ -24,6 +24,11 @@ import { MapComponent } from './dashboard/map/map.component';
 import { AboutComponent } from './dashboard/about/about.component';
 import { TopnavComponent } from './dashboard/topnav/topnav.component';
 
+import { DriverService } from './services/driverService/driver.service';
+import { MapService } from './services/mapService/map.service';
+
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 
 import { routes } from './app.routes';
 
@@ -40,6 +45,7 @@ import { routes } from './app.routes';
   ],
 
   imports: [
+    NgxDatatableModule,
     BrowserAnimationsModule,
     FormsModule,
     CommonModule,
@@ -52,7 +58,7 @@ import { routes } from './app.routes';
       apiKey: 'AIzaSyDbe749fuRGdvKhAm96T9-ryU0hyjmbrT0'
     })
   ],
-  providers: [],
+  providers: [DriverService, MapService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

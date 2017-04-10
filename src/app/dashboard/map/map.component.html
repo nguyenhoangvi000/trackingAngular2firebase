@@ -1,7 +1,7 @@
 <h2><strong>Theo dõi lộ trình</strong></h2>
 <hr>
 <md-select color="accent" placeholder="Danh sách tài xế">
-  <md-option *ngFor="let driver of drivers|async" [value]="driver.name">{{ driver.name }}</md-option>
+  <md-option (click)="changeDriver(driver)" *ngFor="let driver of driverCurrents|async" [value]="driver.name">{{ driver.name }}</md-option>
 </md-select>
 <md-card-content>
   <sebm-google-map [latitude]="currentLat" [longitude]="currentLng" [zoom]="15">
