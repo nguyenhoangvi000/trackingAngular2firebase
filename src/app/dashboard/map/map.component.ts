@@ -13,6 +13,7 @@ export class MapComponent implements OnInit {
   geolocationCurrents: FirebaseListObservable<any[]>;
   driverCurrents: FirebaseListObservable<any[]>;
 
+
   currentLat: number;
   currentLng: number;
 
@@ -30,6 +31,7 @@ export class MapComponent implements OnInit {
 
   changeDriver(driver) {
     console.log(driver.name);
+    this.geolocationCurrents = this.af.database.list('geolocationCurrent');
   }
 
   ngOnInit() {

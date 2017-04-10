@@ -28,7 +28,7 @@ import { DriverService } from './services/driverService/driver.service';
 import { MapService } from './services/mapService/map.service';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { routes } from './app.routes';
 
@@ -50,6 +50,7 @@ import { routes } from './app.routes';
     FormsModule,
     CommonModule,
     HttpModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(firebaseConfig),
     MaterialModule.forRoot(),

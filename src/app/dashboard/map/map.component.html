@@ -1,4 +1,4 @@
-<h2><strong>Theo dõi lộ trình</strong></h2>
+<h3><strong>Theo dõi lộ trình</strong></h3>
 <hr>
 <md-select color="accent" placeholder="Danh sách tài xế">
   <md-option (click)="changeDriver(driver)" *ngFor="let driver of driverCurrents|async" [value]="driver.name">{{ driver.name }}</md-option>
