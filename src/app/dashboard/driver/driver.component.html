@@ -1,10 +1,12 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-md-8">
-      <h2><strong>Danh sách tài xế</strong></h2>
+    <div class="col-md-12">
+      <h3><md-icon>directions_car</md-icon><strong> Danh sách tài xế</strong></h3>
     </div>
-    <div class="col-md-4">
+    <br>
+    <hr>
+    <div class="col-md-4 justify-content-right">
       <button (click)="openDialog()" color="accent" md-raised-button>
             <md-icon md-font-set="material-icons">add_box</md-icon><span> Thêm tài xế</span>
           </button>
@@ -29,8 +31,8 @@
         {{value}}
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Tuổi" [flexGrow]="1">
-      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+    <ngx-datatable-column name="Trạng thái" [flexGrow]="1">
+      <ng-template let-value="value" ngx-datatable-cell-template>
         {{value}}
       </ng-template>
     </ngx-datatable-column>

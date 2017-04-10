@@ -1,14 +1,20 @@
-<h3><strong>Theo dõi lộ trình</strong></h3>
+<h4><strong><md-icon>track_changes</md-icon> Theo dõi lộ trình</strong></h4>
 <hr>
-<md-select color="accent" placeholder="Danh sách tài xế">
-  <md-option (click)="changeDriver(driver)" *ngFor="let driver of driverCurrents|async" [value]="driver.name">{{ driver.name }}</md-option>
-</md-select>
+<div class="row">
+  <div class="col-md-6">
+    <md-select color="accent" placeholder="Danh sách tài xế">
+      <md-option (click)="changeDriver(driver)" *ngFor="let driver of driverCurrents|async" [value]="driver.name">{{ driver.name }}</md-option>
+    </md-select>
+  </div>
+</div>
 <md-card-content>
-  <sebm-google-map [latitude]="currentLat" [longitude]="currentLng" [zoom]="15">
-    <sebm-google-map-polyline [strokeWeight]="'10'" [strokeColor]="'#B71C1C'">
-      <sebm-google-map-polyline-point *ngFor="let geolocationCurrent of geolocationCurrents|async" [latitude]="geolocationCurrent.lat"
-        [longitude]="geolocationCurrent.lng">
-      </sebm-google-map-polyline-point>
-    </sebm-google-map-polyline>
-  </sebm-google-map>
+  <div class="row">
+    <sebm-google-map [latitude]="currentLat" [longitude]="currentLng" [zoom]="15">
+      <sebm-google-map-polyline [strokeWeight]="'10'" [strokeColor]="'#B71C1C'">
+        <sebm-google-map-polyline-point *ngFor="let geolocationCurrent of geolocationCurrents|async" [latitude]="geolocationCurrent.lat"
+          [longitude]="geolocationCurrent.lng">
+        </sebm-google-map-polyline-point>
+      </sebm-google-map-polyline>
+    </sebm-google-map>
+  </div>
 </md-card-content>

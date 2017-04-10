@@ -1,10 +1,17 @@
 <md-toolbar color="accent">
-  <button md-icon-button (click)="randomName(start)">
+  <div class="col-9 col-md-11 col-sm-11">
+    <button md-icon-button (click)="randomName(start)">
       <md-icon md-font-set="material-icons">menu</md-icon>
-    </button> Giám sát hành trình
-  <button md-icon-button>
+    </button>
+    <span>Giám sát hành trình</span>
+  </div>
+  <div class="col col-md-1 col-sx-1 justify-content-md-right">
+    <button class="" md-icon-button>
       <md-icon md-font-set="material-icons">more_vert</md-icon>
     </button>
+  </div>
+
+
 </md-toolbar>
 <md-sidenav-container class="side-nav-container">
   <md-sidenav #start>
@@ -12,21 +19,20 @@
       <a md-list-item><span><md-icon>directions</md-icon>&emsp;&emsp;<strong>Location Tracking</strong></span></a>
       <hr/>
       <a md-list-item [routerLink]="['maps']">
-        <span><md-icon>track_changes</md-icon>&emsp;&emsp;Giám sát</span>
+        <span><md-icon>track_changes</md-icon>&emsp;&emsp;Theo dõi lộ trình</span>
       </a>
       <a md-list-item [routerLink]="['driver']">
         <span><md-icon>directions_car</md-icon>&emsp;&emsp;Tài xế</span>
       </a>
       <a md-list-item [routerLink]="['about']">
-        <span><md-icon>help</md-icon>&emsp;&emsp;About</span>
+        <span><md-icon>help</md-icon>&emsp;&emsp;Thông tin</span>
       </a>
       <hr/>
-      <a md-list-item (click)="start.close()"><span><md-icon>close</md-icon>&emsp;&emsp;Close</span></a>
+      <a md-list-item (click)="start.close()"><span><md-icon>close</md-icon>&emsp;&emsp;Đóng</span></a>
     </md-nav-list>
     <hr>
   </md-sidenav>
-  <md-card class="router-card">
+  <md-card class="router-card ">
     <router-outlet></router-outlet>
   </md-card>
-
 </md-sidenav-container>
