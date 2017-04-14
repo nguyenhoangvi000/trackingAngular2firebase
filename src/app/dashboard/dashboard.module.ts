@@ -7,11 +7,15 @@ import { DashboardComponent } from './dashboard.component';
 import { AboutModule } from './about/about.module';
 import { MapModule } from './map/map.module';
 import { DriverModule } from './driver/driver.module';
+import { DriverComponent, DialogResultExampleDialog } from './driver/driver.component';
 import { TopnavModule } from './topnav/topnav.module';
 import { SidenavModule } from './sidenav/sidenav.module';
 
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { TopnavComponent } from './topnav/topnav.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { DialogconfirmComponent } from './dialogconfirm/dialogconfirm.component';
+
 
 @NgModule({
     imports: [
@@ -22,7 +26,8 @@ import { TopnavComponent } from './topnav/topnav.component';
         DriverModule,
         TopnavModule
     ],
-    declarations: [DashboardComponent, TopnavComponent],
+    entryComponents: [DialogComponent],
+    declarations: [DashboardComponent, TopnavComponent, DialogconfirmComponent],
     exports: [DashboardComponent]
 })
 

@@ -18,11 +18,13 @@ import 'hammerjs';
 
 import { LoginComponent } from "./login/login.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
-import { DriverComponent } from './dashboard/driver/driver.component';
+import { DriverComponent, DialogResultExampleDialog } from './dashboard/driver/driver.component';
 import { SidenavComponent } from './dashboard/sidenav/sidenav.component';
 import { MapComponent } from './dashboard/map/map.component';
 import { AboutComponent } from './dashboard/about/about.component';
 import { TopnavComponent } from './dashboard/topnav/topnav.component';
+import { DialogComponent } from './dashboard/dialog/index';
+import { DialogconfirmComponent } from './dashboard/dialogconfirm/index';
 
 import { DriverService } from './services/driverService/driver.service';
 import { MapService } from './services/mapService/map.service';
@@ -36,6 +38,8 @@ import { routes } from './app.routes';
   declarations: [
     AppComponent,
     DriverComponent,
+    DialogComponent,
+    DialogconfirmComponent,
     SidenavComponent,
     MapComponent,
     LoginComponent,
@@ -59,6 +63,7 @@ import { routes } from './app.routes';
       apiKey: 'AIzaSyDbe749fuRGdvKhAm96T9-ryU0hyjmbrT0'
     })
   ],
+  entryComponents: [DialogComponent,DialogconfirmComponent],
   providers: [DriverService, MapService],
   bootstrap: [AppComponent]
 })

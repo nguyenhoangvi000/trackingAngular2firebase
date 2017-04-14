@@ -1,5 +1,14 @@
-.sebm-google-map-container {
-  height: 350px;
+
+/*@media(min-width:1200){*/
+  .sebm-google-map-container {
+    height: 350px;
+  }
+/*}*/
+
+@media(min-width:1367){
+  .sebm-google-map-container {
+    height: 550px;
+  }
 }
 
 .example-card{
