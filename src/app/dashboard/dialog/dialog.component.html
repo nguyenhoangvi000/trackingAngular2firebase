@@ -1,20 +1,24 @@
 <h2 md-dialog-title>Thêm tài xế</h2>
 <hr>
 <div md-dialog-content>
-  <md-input-container color="warn">
+  <md-input-container color="accent">
     <input mdInput placeholder="Họ tên">
   </md-input-container>
-  <br>
+  <md-input-container color="accent">
+    <input mdInput placeholder="Tuổi">
+  </md-input-container>
+  <md-input-container color="accent">
+    <input mdInput placeholder="Tên xe">
+  </md-input-container>
+  <md-input-container color="accent">
+    <input mdInput placeholder="Biển số">
+  </md-input-container>
   <md-input-container color="accent">
     <input mdInput type="date" placeholder="Ngày sinh">
   </md-input-container>
-
-  <md-select color="accent" placeholder="Danh sách tài xế">
-    <md-option>Test 1</md-option>
-    <md-option>Test 1</md-option>
-    <md-option>Test 1</md-option>
-  </md-select>
-  <br>
 </div>
-<button color="primary" md-raised-button (click)="add()"><md-icon  md-font-set="material-icons">done</md-icon> <strong>Thêm</strong></button>
-<button md-raised-button (click)="close()"><md-icon  md-font-set="material-icons">close</md-icon><strong> Hủy bỏ</strong></button>
+<div md-dialog-actions>
+  <button color="primary" md-raised-button (click)="add()"><md-icon  md-font-set="material-icons">done</md-icon> <strong>Thêm</strong></button>
+  <button md-raised-button (click)="close()"><md-icon  md-font-set="material-icons">close</md-icon><strong> Hủy bỏ</strong></button>
+</div>
+<hr>

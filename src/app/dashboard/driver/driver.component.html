@@ -71,30 +71,22 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="Trạng thái" [flexGrow]="1">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value}}
+            <md-slide-toggle>Off</md-slide-toggle>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Thao tác" [flexGrow]="3">
           <ng-template let-row="rows" let-value="value" ngx-datatable-cell-template>
             <div class="row">
-              <div class="col-lg-3">
-                <button color="accent" md-raised-button>
+              <button color="accent" md-raised-button>
                   <md-icon md-font-set="material-icons">mode_edit</md-icon><span></span>
                 </button>
-              </div>
-              <div class="col-lg-3">
-                <button (click)="delete()" color="warn" md-raised-button>
+              <button (click)="delete()" color="warn" md-raised-button>
                   <md-icon  md-font-set="material-icons">delete</md-icon><span></span>
                 </button>
-              </div>
-              <div class="col-lg-3">
-                <button color="primary" md-raised-button>
+              <button color="primary" md-raised-button>
                   <md-icon md-font-set="material-icons">chat_bubble</md-icon><span></span>
                 </button>
-              </div>
             </div>
-
-
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
