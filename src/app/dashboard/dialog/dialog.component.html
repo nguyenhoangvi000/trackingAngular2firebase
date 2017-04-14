@@ -1,14 +1,20 @@
 <h2 md-dialog-title>Thêm tài xế</h2>
 <hr>
 <div md-dialog-content>
-  <md-input-container>
-    <input color="warn" mdInput placeholder="Top">
+  <md-input-container color="warn">
+    <input mdInput placeholder="Họ tên">
   </md-input-container>
   <br>
-  <md-input-container>
-    <input color="warn" mdInput placeholder="Bottom">
+  <md-input-container color="accent">
+    <input mdInput type="date" placeholder="Ngày sinh">
   </md-input-container>
+
+  <md-select color="accent" placeholder="Danh sách tài xế">
+    <md-option>Test 1</md-option>
+    <md-option>Test 1</md-option>
+    <md-option>Test 1</md-option>
+  </md-select>
   <br>
 </div>
-<button color="primary" md-raised-button (click)="add()">Thêm</button>
-<button md-raised-button (click)="close()">Hủy bỏ</button>
+<button color="primary" md-raised-button (click)="add()"><md-icon  md-font-set="material-icons">done</md-icon> <strong>Thêm</strong></button>
+<button md-raised-button (click)="close()"><md-icon  md-font-set="material-icons">close</md-icon><strong> Hủy bỏ</strong></button>
