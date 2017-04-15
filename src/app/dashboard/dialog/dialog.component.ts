@@ -11,10 +11,20 @@ export class DialogComponent implements OnInit {
   constructor(public dialogRef: MdDialogRef<any>) { }
 
   ngOnInit() {
-    
+
   }
 
-  add() {
+  addDriver(driverId) {
+
+  }
+
+
+  editDriver(driverId) {
+
+  }
+
+
+  getDriver(driverId) {
 
   }
 
@@ -22,6 +32,5 @@ export class DialogComponent implements OnInit {
     console.log('ok');
     this.dialogRef.close();
   }
-
 
 }

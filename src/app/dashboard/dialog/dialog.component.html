@@ -1,23 +1,31 @@
 <h2 md-dialog-title>Thêm tài xế</h2>
 <hr>
 <div md-dialog-content>
-  <md-input-container color="accent">
-    <input mdInput placeholder="Họ tên">
-  </md-input-container>
-  <md-input-container color="accent">
-    <input mdInput placeholder="Tuổi">
-  </md-input-container>
-  <md-input-container color="accent">
-    <input mdInput placeholder="Tên xe">
-  </md-input-container>
-  <md-input-container color="accent">
-    <input mdInput placeholder="Biển số">
-  </md-input-container>
-  <md-input-container color="accent">
-    <input mdInput type="date" placeholder="Ngày sinh">
-  </md-input-container>
+  <div class="col-md-12">
+    <div class="row align-items-center">
+      <md-input-container color="accent">
+        <input mdInput placeholder="Họ tên">
+      </md-input-container>
+      <md-input-container color="accent">
+        <input mdInput placeholder="Tuổi">
+      </md-input-container>
+    </div>
+    <div class="row align-items-center">
+      <md-input-container color="accent">
+        <input mdInput placeholder="Tên xe">
+      </md-input-container>
+      <md-input-container color="accent">
+        <input mdInput placeholder="Biển số">
+      </md-input-container>
+    </div>
+    <div class="row align-items-center">
+      <md-input-container color="accent">
+        <input mdInput type="date" placeholder="Ngày sinh">
+      </md-input-container>
+    </div>
+  </div>
 </div>
-<div md-dialog-actions>
+<div class="row align-items-center" md-dialog-actions>
   <button color="primary" md-raised-button (click)="add()"><md-icon  md-font-set="material-icons">done</md-icon> <strong>Thêm</strong></button>
   <button md-raised-button (click)="close()"><md-icon  md-font-set="material-icons">close</md-icon><strong> Hủy bỏ</strong></button>
 </div>
