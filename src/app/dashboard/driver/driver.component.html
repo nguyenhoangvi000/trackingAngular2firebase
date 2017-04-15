@@ -54,17 +54,17 @@
     <div class="col-md-12 col-xs-12 col-lg-12">
       <ngx-datatable [rows]="rows" [columns]="columns" class="material" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
         [rowHeight]="'auto'">
-        <ngx-datatable-column name="STT" [flexGrow]="1">
-          <ng-template let-value="value" ngx-datatable-cell-template>
+        <ngx-datatable-column name="STT" prop="ordernum" [flexGrow]="1">
+          <ng-template let-value="value" let-column="name" ngx-datatable-cell-template>
             {{value}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Họ và tên" [flexGrow]="2">
-          <ng-template let-row="rows" let-value="value" ngx-datatable-cell-template>
+        <ngx-datatable-column name="Họ và tên" prop="name" [flexGrow]="2">
+          <ng-template let-row="rows" let-column="name" let-value="value" ngx-datatable-cell-template>
             {{value}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Ngày sinh" [flexGrow]="1">
+        <ngx-datatable-column name="Ngày sinh" prop="dob" [flexGrow]="1">
           <ng-template let-value="value" ngx-datatable-cell-template>
             {{value}}
           </ng-template>
