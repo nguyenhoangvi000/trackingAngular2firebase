@@ -6,7 +6,9 @@
       <md-option (click)="changeDriver(driver)" *ngFor="let driver of driverCurrents|async" [value]="driver.name">{{ driver.name }}</md-option>
     </md-select>
   </div>
+
 </div>
+<br>
 <md-card-content>
   <div class="row">
     <sebm-google-map [latitude]="currentLat" [longitude]="currentLng" [zoom]="15">
