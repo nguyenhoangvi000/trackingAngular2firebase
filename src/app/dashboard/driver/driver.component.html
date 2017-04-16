@@ -16,55 +16,21 @@
   <br/>
 </div>
 <div>
-  <!--<ngx-datatable class="material" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="rows">
-    <ngx-datatable-column name="STT" [flexGrow]="1">
-      <ng-template let-value="value" ngx-datatable-cell-template>
-        {{value}}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Họ và tên" [flexGrow]="2">
-      <ng-template let-value="value" ngx-datatable-cell-template>
-        {{value}}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Ngày sinh" [flexGrow]="1">
-      <ng-template let-value="value" ngx-datatable-cell-template>
-        {{value}}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Trạng thái" [flexGrow]="1">
-      <ng-template let-value="value" ngx-datatable-cell-template>
-        {{value}}
-      </ng-template>
-    </ngx-datatable-column>
-    
-    <ngx-datatable-column name="Thao tác" [flexGrow]="1">
-    <ngx-datatable-column [flexGrow]="1">
-      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-        <button color="primary" md-raised-button>
-            <md-icon md-font-set="material-icons">delete</md-icon><span></span>
-          </button>
-        <button color="primary" md-raised-button>
-            <md-icon md-font-set="material-icons">mode_edit</md-icon><span></span>
-          </button>
-      </ng-template>
-    </ngx-datatable-column>
-  </ngx-datatable>-->
   <div class="row">
     <div class="col-md-12 col-xs-12 col-lg-12">
       <ngx-datatable [rows]="rows" [columns]="columns" class="material" [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50"
         [rowHeight]="'auto'">
-        <ngx-datatable-column name="STT" [flexGrow]="1">
-          <ng-template let-value="value" ngx-datatable-cell-template>
+        <ngx-datatable-column name="STT" prop="ordernum" [flexGrow]="1">
+          <ng-template let-value="value" let-column="name" ngx-datatable-cell-template>
             {{value}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Họ và tên" [flexGrow]="2">
-          <ng-template let-row="rows" let-value="value" ngx-datatable-cell-template>
+        <ngx-datatable-column name="Họ và tên" prop="name" [flexGrow]="2">
+          <ng-template let-row="rows" let-column="name" let-value="value" ngx-datatable-cell-template>
             {{value}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Ngày sinh" [flexGrow]="1">
+        <ngx-datatable-column name="Ngày sinh" prop="dob" [flexGrow]="1">
           <ng-template let-value="value" ngx-datatable-cell-template>
             {{value}}
           </ng-template>

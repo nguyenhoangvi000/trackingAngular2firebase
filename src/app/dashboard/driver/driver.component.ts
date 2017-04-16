@@ -9,20 +9,29 @@ import { DialogconfirmComponent } from '../dialogconfirm/index';
   selector: 'app-driver',
   templateUrl: './driver.component.html'
 })
+
+// export class Driver {
+//   name: String;
+//   dob: Date;
+//   gender: String;
+// }
+
 export class DriverComponent implements OnInit {
 
   rows = [
-    { name: 'Austin', gender: 'Male', company: 'Swimlane' },
-    { name: 'Dany', gender: 'Male', company: 'KFC' },
-    { name: 'Molly', gender: 'Female', company: 'Burger King' },
+    { ordernum: '1', name: 'Austin', gender: 'Male', dob: '29/11/1995' },
+    { ordernum: '2', name: 'Dany', gender: 'Male', dob: '29/11/1984' },
+    { ordernum: '3', name: 'Molly', gender: 'Female', dob: '29/11/1986' },
   ];
-  columns = [
-    { prop: 'Name' },
-    { name: 'Gender' },
-    { name: 'Company' }
-  ];
+  // columns = [
+  //   { prop: 'Họ và tên' },
+  //   { name: 'Gender' },
+  //   { name: 'Company' }
+  // ];
 
   //rows: any[];
+
+  // driver: Driver;
 
   driverCurrents: FirebaseListObservable<any[]>;
 
