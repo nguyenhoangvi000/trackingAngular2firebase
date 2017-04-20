@@ -2,13 +2,13 @@
 <hr>
 <div class="row">
   <div class="col-md-6">
+    <br>
     <md-select color="accent" placeholder="Danh sách tài xế">
-      <md-option (click)="changeDriver(driver)" *ngFor="let driver of driverCurrents|async" [value]="driver.name">{{ driver.name }}</md-option>
+      <md-option (click)=changeDriver(driver) *ngFor="let driver of driverCurrents|async" [value]="driver.name">{{ driver.name }}</md-option>
     </md-select>
   </div>
 
 </div>
-<br>
 <md-card-content>
   <br>
   <div class="row">

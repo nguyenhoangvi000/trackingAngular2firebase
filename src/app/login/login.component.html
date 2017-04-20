@@ -1,4 +1,3 @@
-
 <div class="row justify-content-center">
   <div class="col-md-8 offset-md-4">
     <md-card class="example-card">
@@ -11,12 +10,13 @@
         </md-input-container><br>
         <br>
         <md-input-container color="accent" class="full-width-input">
-          <input mdInput placeholder="Mật khẩu">
+          <input mdInput type="password" placeholder="Mật khẩu">
         </md-input-container>
 
       </md-card-content>
       <md-card-actions class="offset-md-1">
-        <a class="full-width-input" md-raised-button routerLink="/dashboard/maps">Đăng nhập</a>
+        <!--<a class="full-width-input" (click)="login()" md-raised-button routerLink="/dashboard/maps">Đăng nhập</a>-->
+        <a color="accent" class="full-width-input" md-raised-button>Đăng nhập</a>
       </md-card-actions>
     </md-card>
   </div>

@@ -4,6 +4,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { DriverService } from '../../services/driverService/index';
 import { DialogComponent } from '../dialog/dialog.component';
 import { DialogconfirmComponent } from '../dialogconfirm/index';
+import { DialogchatComponent } from '../dialogchat/index';
 
 @Component({
   selector: 'app-driver',
@@ -18,11 +19,16 @@ import { DialogconfirmComponent } from '../dialogconfirm/index';
 
 export class DriverComponent implements OnInit {
 
-  rows = [
-    { ordernum: '1', name: 'Austin', gender: 'Male', dob: '29/11/1995' },
-    { ordernum: '2', name: 'Dany', gender: 'Male', dob: '29/11/1984' },
-    { ordernum: '3', name: 'Molly', gender: 'Female', dob: '29/11/1986' },
-  ];
+  // rows = [
+  //   { ordernum: '1', name: 'Austin', gender: 'Male', dob: '29/11/1995' },
+  //   { ordernum: '2', name: 'Dany', gender: 'Male', dob: '29/11/1984' },
+  //   { ordernum: '3', name: 'Molly', gender: 'Female', dob: '29/11/1986' },
+  // ];
+
+  rows = [];
+  driverTemp: any;
+  isDataAvailable: boolean = false;
+
   // columns = [
   //   { prop: 'Họ và tên' },
   //   { name: 'Gender' },
@@ -35,11 +41,12 @@ export class DriverComponent implements OnInit {
 
   driverCurrents: FirebaseListObservable<any[]>;
 
-  constructor(public dialog: MdDialog, af: AngularFire, driverService: DriverService) {
-    var rowTemps = this.rows;
-    driverService.getAllDriver().forEach(driver => ({
+  constructor(public dialog: MdDialog, af: AngularFire, private driverService: DriverService) {
 
-    }))
+
+    // driverService.getAllDriver().forEach(driver => ({
+
+    // }))
 
   }
 
@@ -48,10 +55,19 @@ export class DriverComponent implements OnInit {
 
     let dialogRef = this.dialog.open(DialogComponent);
 
-
     dialogRef.afterClosed().subscribe((result: string) => {
 
     });
+  }
+
+  edit() {
+    let dialogRef = this.dialog.open(DialogComponent);
+
+  }
+
+  chat() {
+
+    let dialogRef = this.dialog.open(DialogchatComponent);
 
   }
 
@@ -61,6 +77,14 @@ export class DriverComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.driverService.getAllDriver().forEach(driver => {
+      while (driver == null) {
+        setInterval(100);
+      }
+      this.rows = driver;
+      console.log(this.rows);
+      this.isDataAvailable = true;
+    });
   }
 
 }

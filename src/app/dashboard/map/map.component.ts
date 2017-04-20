@@ -10,7 +10,7 @@ import { DriverService } from '../../services/driverService/index';
 })
 export class MapComponent implements OnInit {
 
-  geolocationCurrents: FirebaseListObservable<any[]>;
+  geolocationCurrents: FirebaseListObservable<any[]> = this.af.database.list('/geolocationCurrents');
   driverCurrents: FirebaseListObservable<any[]>;
 
 
@@ -18,7 +18,7 @@ export class MapComponent implements OnInit {
   currentLng: number;
 
   constructor(private af: AngularFire, private driverService: DriverService) {
-    this.geolocationCurrents = af.database.list('/geolocationCurrents')
+    // this.geolocationCurrents = af.database.list('/geolocationCurrents')
 
     this.driverCurrents = driverService.getAllDriver();
     console.log(driverService);
@@ -30,8 +30,8 @@ export class MapComponent implements OnInit {
   }
 
   changeDriver(driver) {
-    console.log(driver.name);
-    this.geolocationCurrents = this.af.database.list('geolocationCurrent');
+    console.log(driver.uid);
+    this.geolocationCurrents = this.af.database.list('/geolocationCurrents');
   }
 
   ngOnInit() {

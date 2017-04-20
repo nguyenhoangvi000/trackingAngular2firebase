@@ -2,6 +2,8 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import { FormsModule } from '@angular/forms'
+
 import { DashboardComponent } from './dashboard.component';
 
 import { AboutModule } from './about/about.module';
@@ -15,6 +17,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { TopnavComponent } from './topnav/topnav.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogconfirmComponent } from './dialogconfirm/dialogconfirm.component';
+import { DialogchatComponent } from './dialogchat/index';
 
 
 @NgModule({
@@ -24,10 +27,11 @@ import { DialogconfirmComponent } from './dialogconfirm/dialogconfirm.component'
         AboutModule,
         MapModule,
         DriverModule,
-        TopnavModule
+        TopnavModule,
+        FormsModule
     ],
     entryComponents: [DialogComponent],
-    declarations: [DashboardComponent, TopnavComponent, DialogconfirmComponent],
+    declarations: [DashboardComponent, TopnavComponent, DialogconfirmComponent, DialogchatComponent],
     exports: [DashboardComponent]
 })
 

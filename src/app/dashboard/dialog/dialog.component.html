@@ -4,10 +4,10 @@
   <div class="col-md-12">
     <div class="row align-items-center">
       <md-input-container color="accent">
-        <input mdInput placeholder="Họ tên">
+        <input type="text" name="name" ([ngModel])="driverObject.name" (change)="changeDriverName($event)" mdInput placeholder="Họ tên">
       </md-input-container>
       <md-input-container color="accent">
-        <input mdInput placeholder="Tuổi">
+        <input type="number" ([ngModel])="driverObject.age" (change)="changeDriverAge($event)" mdInput placeholder="Tuổi">
       </md-input-container>
     </div>
     <div class="row align-items-center">
@@ -15,18 +15,18 @@
         <input mdInput placeholder="Tên xe">
       </md-input-container>
       <md-input-container color="accent">
-        <input mdInput placeholder="Biển số">
+        <input mdInput (change)="changeDriverLisenceNumber($event)" placeholder="Biển số">
       </md-input-container>
     </div>
     <div class="row align-items-center">
       <md-input-container color="accent">
-        <input mdInput type="date" placeholder="Ngày sinh">
+        <input mdInput type="date" (change)="changeDriverDateofBirth($event)" placeholder="Ngày sinh">
       </md-input-container>
     </div>
   </div>
 </div>
 <div class="row align-items-center" md-dialog-actions>
-  <button color="primary" md-raised-button (click)="add()"><md-icon  md-font-set="material-icons">done</md-icon> <strong>Thêm</strong></button>
+  <button color="primary" md-raised-button (click)=addDriver()><md-icon  md-font-set="material-icons">done</md-icon> <strong>Thêm</strong></button>
   <button md-raised-button (click)="close()"><md-icon  md-font-set="material-icons">close</md-icon><strong> Hủy bỏ</strong></button>
 </div>
 <hr>
