@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router'
+import { AuthProviders, AuthMethods, AngularFire } from 'angularfire2';
+import { UserService } from './../services/userService/index';
 
 
 import { MdSidenav } from '@angular/material';
@@ -14,13 +17,16 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   @ViewChild('app-sidenav')
   sidenav: SidenavComponent;
 
-  constructor() { }
+  constructor(private router: Router, private af: AngularFire, private userService: UserService) {
+  }
+
 
   ngOnInit() {
+
   }
 
   ngAfterViewInit() {
-    // this.start.open();
+
   }
 
 }
