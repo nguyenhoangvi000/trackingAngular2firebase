@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseListObservable, AuthProviders, AuthMethods } from 'angularfire2';
-import { Http, Headers } from '@angular/http'
+import { Http, Headers } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @Injectable()
 export class UserService {
@@ -8,6 +10,19 @@ export class UserService {
   isLoggedin: boolean;
   userList: FirebaseListObservable<any[]>;
 
-  constructor(private af: AngularFire, private _http: Http) { }
+  constructor(private af: AngularFire, private _http: Http, private router: Router) { }
+
+  canActive(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    return this.af.auth.map((auth) => {
+      if (auth != null) {
+        return false;
+      }
+      else {
+        return true;
+      }
+    });
+  }
+
+
 
 }

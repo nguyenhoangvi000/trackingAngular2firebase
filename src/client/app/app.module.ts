@@ -7,7 +7,8 @@ import { CommonModule } from '@angular/common';
 import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { AppComponent } from './app.component';
+import { AppComponent, PageNotFoundComponent } from './app.component';
+
 import { AngularFireModule } from 'angularfire2';
 import { firebaseConfig } from './../environments/firebase.config';
 import { MaterialModule } from '@angular/material';
@@ -39,6 +40,7 @@ import { routes } from './app.routes';
 @NgModule({
   declarations: [
     AppComponent,
+    PageNotFoundComponent,
     DriverComponent,
     DialogComponent,
     DialogconfirmComponent,
