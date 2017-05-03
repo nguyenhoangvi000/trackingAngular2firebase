@@ -24,3 +24,11 @@ export class AppComponent {
   }
 
 }
+
+
+@Component({
+  templateUrl: "./page.not.found.html"
+})
+export class PageNotFoundComponent {
+
+}
