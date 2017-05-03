@@ -9,7 +9,7 @@
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "postinstall": "ng build --aot -prod",
     "deploy": "git push origin master && git push heroku master",
-    "start": "node server.js ng serve"
+    "start": "node server.js"
   },
   "private": true,
   "dependencies": {
