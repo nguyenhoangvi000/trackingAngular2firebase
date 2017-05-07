@@ -2,6 +2,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { DriverService } from '../../services/driverService/index';
+import { LocalStorageService } from 'angular-2-local-storage';
+// import { Driver } from '../../models/driver/';
+
 
 @Component({
   selector: 'app-dialog',
@@ -16,24 +19,38 @@ export class DialogComponent implements OnInit {
     name: "",
     age: "",
     licensePlace: "",
-    dob: ""
+    dob: "",
+    carName: "",
+    Email: ""
   });
 
+  driverID: any;
 
 
 
-  constructor(public dialogRef: MdDialogRef<any>, private driverService: DriverService) { }
+
+  constructor(public dialogRef: MdDialogRef<any>, private driverService: DriverService, private localStorage: LocalStorageService) { }
 
   ngOnInit() {
 
   }
 
   addDriver() {
-    if (this.driverObject.age != null || this.driverObject.dob != null || this.driverObject.licensePlace != "" || this.driverObject.name != null) {
-      this.driverService.addDriver(this.driverObject);
-      this.driverObject = new Driver();
-    }
+    console.log('Vao trong add roi ne');
+    // if (this.driverObject.age != null || this.driverObject.dob != null || this.driverObject.licensePlace != "" || this.driverObject.name != null) {
 
+    this.driverService.registerDriver(this.driverObject, this.driverObject.Email);
+    // var uid = this.localStorage.get("idDriver");
+    // this.driverService.addDriver(, uid.toString());
+    this.driverObject = new Driver();
+  }
+
+  changeCarName(event) {
+    this.driverObject.carName = event.target.value;
+  }
+
+  changeEmail(event) {
+    this.driverObject.Email = event.target.value;
   }
 
   changeDriverName(event) {
@@ -47,7 +64,7 @@ export class DialogComponent implements OnInit {
   changeDriverLisenceNumber(event) {
     this.driverObject.licensePlace = event.target.value;
   }
-
+  ;
   changeDriverDateofBirth(event) {
     this.driverObject.dob = event.target.value;
   }
@@ -74,6 +91,8 @@ export class Driver {
   age: number;
   licensePlace: string;
   dob: Date;
+  carName: string;
+  Email: string;
 
   constructor(values: Object = {}) {
     Object.assign(this, values);

@@ -12,10 +12,15 @@
     </div>
     <div class="row align-items-center">
       <md-input-container color="accent">
-        <input mdInput placeholder="Tên xe">
+        <input mdInput (change)="changeCarName($event)" placeholder="Tên xe">
       </md-input-container>
       <md-input-container color="accent">
         <input mdInput (change)="changeDriverLisenceNumber($event)" placeholder="Biển số">
+      </md-input-container>
+    </div>
+    <div class="row align-items-center">
+      <md-input-container color="accent">
+        <input mdInput (change)="changeEmail($event)" placeholder="Email">
       </md-input-container>
     </div>
     <div class="row align-items-center">

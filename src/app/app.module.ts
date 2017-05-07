@@ -15,15 +15,16 @@ import { MaterialModule } from '@angular/material';
 import { MdDataTableModule } from 'ng2-md-datatable';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LocalStorageModule } from 'angular-2-local-storage';
 import 'hammerjs';
 
 import { LoginComponent } from "./login/login.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
-import { DriverComponent, DialogResultExampleDialog } from './dashboard/driver/driver.component';
-import { SidenavComponent } from './dashboard/sidenav/sidenav.component';
+import { DriverComponent } from './dashboard/driver/driver.component';
+import { SidenavComponent } from './dashboard/sidenav/index';
 import { MapComponent } from './dashboard/map/map.component';
 import { AboutComponent } from './dashboard/about/about.component';
-import { TopnavComponent } from './dashboard/topnav/topnav.component';
+// import { TopnavComponent } from './dashboard/topnav/topnav.component';
 import { DialogComponent } from './dashboard/dialog/index';
 import { DialogconfirmComponent } from './dashboard/dialogconfirm/index';
 import { DialogchatComponent } from './dashboard/dialogchat/index';
@@ -33,6 +34,7 @@ import { UserService } from './services/userService/user.service';
 import { MapService } from './services/mapService/map.service';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { Ng2DropdownModule } from 'ng2-material-dropdown';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { routes } from './app.routes';
@@ -45,21 +47,25 @@ import { routes } from './app.routes';
     DialogComponent,
     DialogconfirmComponent,
     DialogchatComponent,
-    SidenavComponent,
     MapComponent,
+    SidenavComponent,
     LoginComponent,
     DashboardComponent,
-    AboutComponent,
-    TopnavComponent
+    AboutComponent
   ],
 
   imports: [
     NgxDatatableModule,
+    Ng2DropdownModule,
     BrowserAnimationsModule,
     FormsModule,
     CommonModule,
     HttpModule,
     NgbModule.forRoot(),
+    LocalStorageModule.withConfig({
+      prefix: 'tracking-angular2firebase',
+      storageType: 'localStorage'
+    }),
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(firebaseConfig),
     MaterialModule.forRoot(),

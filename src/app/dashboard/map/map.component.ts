@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { SebmGoogleMap, SebmGoogleMapPolygon, LatLngLiteral } from 'angular2-google-maps/core';
 import { DriverService } from '../../services/driverService/index';
@@ -10,18 +10,23 @@ import { DriverService } from '../../services/driverService/index';
 })
 export class MapComponent implements OnInit {
 
-  geolocationCurrents: FirebaseListObservable<any[]> = this.af.database.list('/geolocationCurrents');
+  geolocationCurrents: FirebaseListObservable<any[]>;
   driverCurrents: FirebaseListObservable<any[]>;
 
 
   currentLat: number;
   currentLng: number;
 
-  constructor(private af: AngularFire, private driverService: DriverService) {
+  constructor(private af: AngularFire, private driverService: DriverService, private ngZone: NgZone) {
     // this.geolocationCurrents = af.database.list('/geolocationCurrents')
 
     this.driverCurrents = driverService.getAllDriver();
     console.log(driverService);
+
+
+    // this.currentLat = currentPosition[0].lat;
+    // this.currentLng = currentPosition[0].lng;
+
     navigator.geolocation.watchPosition((position) => {
       this.currentLat = position.coords.latitude;
       this.currentLng = position.coords.longitude;
@@ -30,8 +35,17 @@ export class MapComponent implements OnInit {
   }
 
   changeDriver(driver) {
-    console.log(driver.uid);
-    this.geolocationCurrents = this.af.database.list('/geolocationCurrents');
+    console.log(driver.$key);
+    var driverKey = '/geolocationCurrents/' + driver.$key;
+    this.geolocationCurrents = this.af.database.list(driverKey);
+    console.log(driverKey);
+
+    navigator.geolocation.watchPosition((position) => {
+      this.currentLat = position.coords.latitude;
+      this.currentLng = position.coords.longitude;
+      console.log(this.currentLat + ":" + this.currentLng);
+    })
+
   }
 
   ngOnInit() {

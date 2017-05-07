@@ -8,6 +8,8 @@ import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from
 export class UserService {
 
   isLoggedin: boolean;
+  userID: any;
+  loginMessage: string;
   userList: FirebaseListObservable<any[]>;
 
   constructor(private af: AngularFire, private _http: Http, private router: Router) { }
@@ -21,6 +23,12 @@ export class UserService {
         return true;
       }
     });
+  }
+
+  logout() {
+    this.af.auth.logout();
+    console.log(this.af.auth.subscribe());
+    this.router.navigate(['/']);
   }
 
 

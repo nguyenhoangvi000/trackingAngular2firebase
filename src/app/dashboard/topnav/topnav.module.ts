@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { TopnavComponent } from './topnav.component';
+// import { TopnavComponent } from './topnav.component';
 
 @NgModule({
     imports: [
         RouterModule
     ],
-    declarations: [TopnavComponent],
-    exports: [TopnavComponent]
+    // declarations: [TopnavComponent],
+    // exports: [TopnavComponent]
 })
 
 export class TopnavModule { }

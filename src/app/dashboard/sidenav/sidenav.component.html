@@ -6,12 +6,27 @@
     <span>Giám sát hành trình</span>
   </div>
   <div class="col col-md-1 col-sx-1 justify-content-md-right">
-    <button class="" md-icon-button>
+    <!--<button class="" md-icon-button>
       <md-icon md-font-set="material-icons">more_vert</md-icon>
+    </button>-->
+    <button md-icon-button [mdMenuTriggerFor]="menu">
+      <md-icon>more_vert</md-icon>
     </button>
+    <md-menu positionX="30" class="toggle-menu" #menu="mdMenu">
+      <button md-menu-item>
+        <md-icon>dialpad</md-icon>
+        <span>Thông báo</span>
+      </button>
+      <button md-menu-item>
+        <md-icon>voicemail</md-icon>
+        <span>Thông tin</span>
+      </button>
+      <button (click)="logout()" md-menu-item>
+        <md-icon>notifications_off</md-icon>
+        <span>Đăng xuất</span>
+      </button>
+    </md-menu>
   </div>
-
-
 </md-toolbar>
 <md-sidenav-container class="side-nav-container">
   <md-sidenav #start>

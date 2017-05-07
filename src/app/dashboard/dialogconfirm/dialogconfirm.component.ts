@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
+import { DriverService } from '../../services/driverService/index';
 
 @Component({
   selector: 'app-dialogconfirm',
@@ -8,12 +9,17 @@ import { MdDialogRef } from '@angular/material';
 })
 export class DialogconfirmComponent implements OnInit {
 
-  constructor(private mdialogRef: MdDialogRef<any>) { }
+  constructor(private mdialogRef: MdDialogRef<any>, private driverService: DriverService) { }
 
   ngOnInit() {
   }
 
-  close(){
+  delete() {
+    this.driverService.removeDriver();
+    this.mdialogRef.close();
+  }
+
+  close() {
     this.mdialogRef.close();
   }
 

@@ -35,18 +35,18 @@
             {{value}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Trạng thái" [flexGrow]="1">
+        <ngx-datatable-column name="Trạng thái" prop="state" [flexGrow]="1">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            <md-slide-toggle>Off</md-slide-toggle>
+            <md-slide-toggle [checked]="false"></md-slide-toggle>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Thao tác" [flexGrow]="3">
-          <ng-template let-row="rows" let-value="value" ngx-datatable-cell-template>
+        <ngx-datatable-column name="Thao tác" prop="$key" [flexGrow]="3">
+          <ng-template let-column="elementsID" let-value="value" ngx-datatable-cell-template>
             <div class="row">
-              <button (click)="edit()" color="accent" md-raised-button>
+              <button (click)="edit(value)" color="accent" md-raised-button>
                   <md-icon md-font-set="material-icons">mode_edit</md-icon><span></span>
                 </button>
-              <button (click)="delete()" color="warn" md-raised-button>
+              <button (click)="delete(value)" color="warn" md-raised-button>
                   <md-icon  md-font-set="material-icons">delete</md-icon><span></span>
                 </button>
               <button (click)="chat()" color="primary" md-raised-button>

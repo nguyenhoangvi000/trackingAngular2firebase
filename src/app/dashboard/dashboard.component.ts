@@ -14,10 +14,28 @@ import { MdSidenav } from '@angular/material';
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
 
+  public isLoggedIn = false;
+  
+
   @ViewChild('app-sidenav')
   sidenav: SidenavComponent;
 
   constructor(private router: Router, private af: AngularFire, private userService: UserService) {
+
+    this.af.auth.subscribe((auth) => {
+      if (auth == null) {
+        console.log('Not Logged In');
+        this.router.navigate(['']);
+        this.isLoggedIn = false;
+        this.userService.loginMessage = "Bạn chưa đăng nhập";
+      }
+      else {
+        console.log('Logged In');
+        this.router.navigate(['/dashboard/maps']);
+        this.isLoggedIn = true;
+      }
+    })
+
   }
 
 

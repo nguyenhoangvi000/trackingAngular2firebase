@@ -15,7 +15,12 @@ export class LoginComponent implements OnInit {
   email: string;
   password: string;
 
-  constructor(private _service: UserService, private af: AngularFire, private _router: Router) { }
+  loginInfo: String;
+
+  constructor(private _service: UserService, private af: AngularFire, private _router: Router, private userService: UserService) {
+    this.af.auth.logout();
+    this.loginInfo = this.userService.loginMessage;
+  }
 
   login() {
     this.af.auth.login({
@@ -25,7 +30,7 @@ export class LoginComponent implements OnInit {
         provider: AuthProviders.Password,
         method: AuthMethods.Password
       }).then((success) => {
-        this._router.navigate(['/dashboard'])
+        this._router.navigate(['/dashboard/maps'])
       }).catch((err) => {
         console.log(err);
         console.log("No nhay vo cho nay ne");

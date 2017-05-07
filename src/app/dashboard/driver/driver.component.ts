@@ -5,6 +5,7 @@ import { DriverService } from '../../services/driverService/index';
 import { DialogComponent } from '../dialog/dialog.component';
 import { DialogconfirmComponent } from '../dialogconfirm/index';
 import { DialogchatComponent } from '../dialogchat/index';
+import { UserService } from '../../services/userService/index';
 
 @Component({
   selector: 'app-driver',
@@ -26,6 +27,7 @@ export class DriverComponent implements OnInit {
   // ];
 
   rows = [];
+  elementsID = [];
   driverTemp: any;
   isDataAvailable: boolean = false;
 
@@ -56,11 +58,12 @@ export class DriverComponent implements OnInit {
     let dialogRef = this.dialog.open(DialogComponent);
 
     dialogRef.afterClosed().subscribe((result: string) => {
-
+      
     });
   }
 
-  edit() {
+  edit(key) {
+    console.log(key);
     let dialogRef = this.dialog.open(DialogComponent);
 
   }
@@ -71,51 +74,67 @@ export class DriverComponent implements OnInit {
 
   }
 
-  delete() {
-    console.log('ok');
+  delete(key) {
+    console.log(key);
+    this.driverService.idDriver = key;
     let dialogRef = this.dialog.open(DialogconfirmComponent);
   }
 
   ngOnInit() {
     this.driverService.getAllDriver().forEach(driver => {
       while (driver == null) {
-        setInterval(100);
+        setInterval(10);
       }
       this.rows = driver;
-      console.log(this.rows);
+
+      driver.forEach((item) => {
+        this.elementsID.push(item.$key);
+      })
       this.isDataAvailable = true;
     });
   }
 
 }
 
-@Component({
-  selector: 'dialog-result-adddriver',
-  template: `<p>It's Jazz!</p>
-  <p><label>How much? <input #howMuch></label></p>
-  <p> {{ data.message }} </p>
-  <button type="button" (click)="dialogRef.close(howMuch.value)">Close dialog</button>
-  <button (click)="togglePosition()">Change dimensions</button>`
 
-})
-export class DialogResultExampleDialog {
-  private _dimesionToggle = false;
 
-  constructor(
-    public dialogRef: MdDialogRef<DialogResultExampleDialog>,
-    @Inject(MD_DIALOG_DATA) public data: any) { }
 
-  togglePosition(): void {
-    this._dimesionToggle = !this._dimesionToggle;
 
-    if (this._dimesionToggle) {
-      this.dialogRef
-        .updateSize('500px', '500px')
-        .updatePosition({ top: '25px', left: '25px' });
-    } else {
-      this.dialogRef
-        .updateSize()
-        .updatePosition();
-    }
-  }
-}
+
+
+
+
+
+
+
+
+// @Component({
+//   selector: 'dialog-result-adddriver',
+//   template: `<p>It's Jazz!</p>
+//   <p><label>How much? <input #howMuch></label></p>
+//   <p> {{ data.message }} </p>
+//   <button type="button" (click)="dialogRef.close(howMuch.value)">Close dialog</button>
+//   <button (click)="togglePosition()">Change dimensions</button>`
+
+// })
+// export class DialogResultExampleDialog {
+//   private _dimesionToggle = false;
+
+//   constructor(
+//     public dialogRef: MdDialogRef<DialogResultExampleDialog>,
+//     @Inject(MD_DIALOG_DATA) public data: any) { }
+
+//   togglePosition(): void {
+//     this._dimesionToggle = !this._dimesionToggle;
+
+//     if (this._dimesionToggle) {
+//       this.dialogRef
+//         .updateSize('500px', '500px')
+//         .updatePosition({ top: '25px', left: '25px' });
+//     } else {
+//       this.dialogRef
+//         .updateSize()
+//         .updatePosition();
+//     }
+//   }
+// }

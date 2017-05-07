@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SidenavComponent } from './sidenav.component';
+// import { SidenavComponent } from './index';
 
 @NgModule({
     imports: [
         RouterModule
-    ],
-    declarations: [SidenavComponent],
-    exports: [SidenavComponent]
+    ]
 })
 
 export class SidenavModule { }
