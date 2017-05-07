@@ -5,12 +5,19 @@
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
     "test": "ng test",
-    "pree2e": "webdriver-manager update --standalone false --gecko false"
+    "pree2e": "webdriver-manager update --standalone false --gecko false",
+    "postinstall": "ng build --aot -prod",
+    "deploy": "git push origin master && git push heroku master",
+    "start": "node server.js"
   },
   "private": true,
   "dependencies": {
+    "@angular/router": "^4.0.0",
+    "bootstrap-v4-dev": "^4.0.0-alpha.5",
+    "express": "4.15.2",
+    "ejs": "2.5.6",
+    "@angular/cli": "^1.0.0-beta.29",
     "@angular/animations": "^4.0.2",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
@@ -18,6 +25,7 @@
     "@angular/core": "^4.0.0",
     "@angular/forms": "^4.0.0",
     "@angular/http": "^4.0.0",
+    "@swimlane/ngx-datatable": "^7.3.0",
     "@angular/material": "^2.0.0-beta.3",
     "@angular/platform-browser": "^4.0.0",
     "angular2-google-maps": "^0.17.0",
@@ -101,5 +109,9 @@
     "typescript": "^2.2.1",
     "uglify-js": "^2.8.14",
     "web-animations-js": "^2.2.2"
+  },
+  "engines": {
+    "node": "6.10.2",
+    "npm": "3.10.10"
   }
 }
