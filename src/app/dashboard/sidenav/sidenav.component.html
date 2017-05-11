@@ -33,7 +33,7 @@
     <md-nav-list>
       <a md-list-item><span><md-icon>directions</md-icon>&emsp;&emsp;<strong>Location Tracking</strong></span></a>
       <hr/>
-      <a md-list-item [routerLink]="['maps']">
+      <a md-list-item [routerLink]="['location']">
         <span><md-icon>track_changes</md-icon>&emsp;&emsp;Theo dõi lộ trình</span>
       </a>
       <a md-list-item [routerLink]="['driver']">
@@ -48,9 +48,12 @@
     <hr>
   </md-sidenav>
   <div class="container">
-    <md-card class="router-card ">
-      <router-outlet></router-outlet>
-    </md-card>
+    <div class="row">
+      <!--<md-card class="router-card-sub col-8"></md-card>-->
+      <md-card class="router-card col-4">
+        <router-outlet></router-outlet>
+      </md-card>
+    </div>
   </div>
 
 </md-sidenav-container>
