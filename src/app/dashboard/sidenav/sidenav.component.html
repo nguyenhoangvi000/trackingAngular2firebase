@@ -34,10 +34,13 @@
       <a md-list-item><span><md-icon>directions</md-icon>&emsp;&emsp;<strong>Location Tracking</strong></span></a>
       <hr/>
       <a md-list-item [routerLink]="['location']">
-        <span><md-icon>track_changes</md-icon>&emsp;&emsp;Theo dõi lộ trình</span>
+        <span><i class="material-icons">my_location</i>&emsp;&emsp;Theo dõi vị trí</span>
       </a>
       <a md-list-item [routerLink]="['driver']">
         <span><md-icon>directions_car</md-icon>&emsp;&emsp;Tài xế</span>
+      </a>
+      <a md-list-item [routerLink]="['route']">
+        <span><md-icon>track_changes</md-icon>&emsp;&emsp;Lộ trình</span>
       </a>
       <a md-list-item [routerLink]="['about']">
         <span><md-icon>help</md-icon>&emsp;&emsp;Thông tin</span>

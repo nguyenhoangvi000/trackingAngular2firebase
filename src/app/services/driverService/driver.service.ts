@@ -2,16 +2,18 @@ import { Injectable } from '@angular/core';
 // import { Driver } from '../../models/driver/';
 import { FirebaseApp, FirebaseAuthState, AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { Observable, Subject } from "rxjs/Rx";
 
 @Injectable()
 export class DriverService {
 
-
+  private idDriverTemp: Subject<string>;
   public idDriver: string;
   currentDriver: FirebaseListObservable<any[]>;
 
 
   constructor(private af: AngularFire, private localStorage: LocalStorageService) {
+    this.idDriverTemp = new Subject<string>();
     this.currentDriver = af.database.list('/drivers');
 
   }
@@ -24,6 +26,21 @@ export class DriverService {
   getAllDriver() {
     return this.currentDriver;
   }
+
+
+  passingDriverId(driverID: string): void {
+    this.idDriverTemp.next(driverID);
+  }
+
+  onPassingDriverID(): Observable<string> {
+    return this.idDriverTemp;
+  }
+
+  // getAllDriver(): Promise<FirebaseListObservable<any[]>> {
+  //   return new Promise(resolve => {
+  //     setTimeout(() => resolve(this.currentDriver), 1000);
+  //   })
+  // }
 
   registerDriver(driver: Driver, Email: String) {
 

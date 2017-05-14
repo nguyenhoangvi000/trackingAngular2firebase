@@ -5,6 +5,7 @@ import { DriverService } from '../../services/driverService/index';
 import { DialogComponent } from '../dialog/dialog.component';
 import { DialogconfirmComponent } from '../dialogconfirm/index';
 import { DialogchatComponent } from '../dialogchat/index';
+import { DialogeditComponent } from '../dialogedit/index';
 import { UserService } from '../../services/userService/index';
 
 @Component({
@@ -64,7 +65,7 @@ export class DriverComponent implements OnInit {
 
   edit(key) {
     console.log(key);
-    let dialogRef = this.dialog.open(DialogComponent);
+    let dialogRef = this.dialog.open(DialogeditComponent);
 
   }
 

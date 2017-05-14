@@ -37,12 +37,12 @@ export class DialogComponent implements OnInit {
 
   addDriver() {
     console.log('Vao trong add roi ne');
-    // if (this.driverObject.age != null || this.driverObject.dob != null || this.driverObject.licensePlace != "" || this.driverObject.name != null) {
+    if (this.driverObject.age != null || this.driverObject.dob != null || this.driverObject.licensePlace != "" || this.driverObject.name != null) {
 
-    this.driverService.registerDriver(this.driverObject, this.driverObject.Email);
-    // var uid = this.localStorage.get("idDriver");
-    // this.driverService.addDriver(, uid.toString());
-    this.driverObject = new Driver();
+      this.driverService.registerDriver(this.driverObject, this.driverObject.Email);
+      this.driverObject = new Driver();
+    }
+    this.close();
   }
 
   changeCarName(event) {

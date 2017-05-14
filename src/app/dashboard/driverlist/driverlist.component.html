@@ -1,0 +1,14 @@
+<md-card>
+  <md-card-header>
+    <h6><strong><md-icon>directions_car</md-icon> Danh sách tài xế</strong></h6>
+  </md-card-header>
+  <hr/>
+  <md-card-content>
+    <md-nav-list>
+      <a (click)=changeDriver(driver) *ngFor="let driver of driverCurrents|async" md-list-item>
+        <span><md-icon>account_circle</md-icon>&emsp;&emsp;{{driver.name}}</span>
+      </a>
+    </md-nav-list>
+  </md-card-content>
+
+</md-card>

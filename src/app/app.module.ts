@@ -22,10 +22,13 @@ import { LoginComponent } from "./login/login.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { DriverComponent } from './dashboard/driver/driver.component';
 import { SidenavComponent } from './dashboard/sidenav/index';
-import { MapComponent } from './dashboard/map/map.component';
+import { MapComponent } from './dashboard/map/index';
+import { DriverlistComponent } from './dashboard/driverlist/index';
+import { LocationComponent } from './dashboard/location/location.component';
 import { AboutComponent } from './dashboard/about/about.component';
 // import { TopnavComponent } from './dashboard/topnav/topnav.component';
 import { DialogComponent } from './dashboard/dialog/index';
+import { DialogeditComponent } from './dashboard/dialogedit/index';
 import { DialogconfirmComponent } from './dashboard/dialogconfirm/index';
 import { DialogchatComponent } from './dashboard/dialogchat/index';
 
@@ -46,12 +49,15 @@ import { routes } from './app.routes';
     DriverComponent,
     DialogComponent,
     DialogconfirmComponent,
+    DialogeditComponent,
     DialogchatComponent,
     MapComponent,
     SidenavComponent,
     LoginComponent,
     DashboardComponent,
-    AboutComponent
+    AboutComponent,
+    LocationComponent,
+    DriverlistComponent
   ],
 
   imports: [
@@ -74,7 +80,7 @@ import { routes } from './app.routes';
       apiKey: 'AIzaSyDbe749fuRGdvKhAm96T9-ryU0hyjmbrT0'
     })
   ],
-  entryComponents: [DialogComponent, DialogconfirmComponent, DialogchatComponent],
+  entryComponents: [DialogComponent, DialogconfirmComponent, DialogchatComponent,DialogeditComponent],
   providers: [DriverService, MapService, UserService],
   bootstrap: [AppComponent]
 })
