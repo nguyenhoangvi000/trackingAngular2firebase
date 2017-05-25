@@ -23,8 +23,6 @@ export class SidenavComponent implements OnInit {
 
   }
 
-
-
   randomName(start: any) {
     console.log('OK');
     start.toggle();

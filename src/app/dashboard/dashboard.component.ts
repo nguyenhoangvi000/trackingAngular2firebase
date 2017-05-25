@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       }
       else {
         console.log('Logged In');
-        this.router.navigate(['/dashboard/location']);
+        this.router.navigate(['/dashboard/chat']);
         this.isLoggedIn = true;
       }
     })

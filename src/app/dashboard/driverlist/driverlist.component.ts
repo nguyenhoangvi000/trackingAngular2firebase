@@ -20,30 +20,32 @@ export class DriverlistComponent implements OnInit {
   currentLng: number;
 
   constructor(private af: AngularFire, private driverService: DriverService, private ngZone: NgZone) {
-    this.driverCurrents = driverService.getAllDriver();
     console.log(driverService);
   }
 
   ngOnInit() {
+    if (this.driverCurrents == null) {
+      this.driverCurrents = this.driverService.getAllDriver();
+    }
   }
 
   changeDriver(driver) {
     console.log(driver.$key);
-    var driverKey = '/geolocationCurrents/' + driver.$key;
+    let driverKey = '/geolocationCurrents/' + driver.$key;
     this.driverService.passingDriverId(driver.$key);
     this.geolocationCurrents = this.af.database.list(driverKey);
     console.log(driverKey);
 
-    const positionCurrent = this.af.database.object(driverKey, { preserveSnapshot: true });
+    let positionCurrent = this.af.database.object(driverKey, { preserveSnapshot: true });
     positionCurrent.subscribe(snapshot => {
       let currentPos = [];
       snapshot.forEach(element => {
         currentPos.push(element);
-      });
-
-      this.currentLat = currentPos[currentPos.length - 1].val().lat;
-      this.currentLng = currentPos[currentPos.length - 1].val().lng;
-
+      })
+      if (currentPos != null) {
+        this.currentLat = currentPos[currentPos.length - 1].val().lat;
+        this.currentLng = currentPos[currentPos.length - 1].val().lng;
+      };
     })
 
     // navigator.geolocation.watchPosition((position) => {

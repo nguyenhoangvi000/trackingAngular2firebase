@@ -6,6 +6,7 @@ import { DriverComponent } from './dashboard/driver/index';
 import { MapComponent } from './dashboard/map/index';
 import { AboutComponent } from './dashboard/about/index';
 import { LocationComponent } from './dashboard/location/index';
+import { ChatComponent } from './dashboard/chat/index';
 
 import { LoginComponent } from './login/index';
 import { PageNotFoundComponent } from './app.component';
@@ -22,7 +23,8 @@ export const routes: Routes = [
             { path: 'about', component: AboutComponent },
             { path: 'driver', component: DriverComponent },
             { path: 'maps', component: MapComponent },
-            { path: 'location', component: LocationComponent }
+            { path: 'location', component: LocationComponent },
+            { path: 'chat', component: ChatComponent }
         ]
     },
     { path: '**', component: PageNotFoundComponent }

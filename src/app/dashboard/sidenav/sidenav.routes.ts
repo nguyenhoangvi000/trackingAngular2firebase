@@ -4,6 +4,7 @@ import { MapComponent } from "./../map/index";
 import { DriverComponent } from "./../driver/index";
 import { AboutComponent } from "./../about/index";
 import { LocationComponent } from "./../location/index";
+import { ChatComponent } from "./../chat/index";
 
 export const SidenavRoutes: Route[] = [
     {
@@ -12,7 +13,8 @@ export const SidenavRoutes: Route[] = [
         children: [
             { path: 'about', component: AboutComponent },
             { path: 'driver', component: DriverComponent },
-            { path: 'location', component: LocationComponent }
+            { path: 'location', component: LocationComponent },
+            { path: 'chat', component: ChatComponent }
         ]
     },
 ];

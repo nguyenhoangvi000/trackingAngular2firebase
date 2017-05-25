@@ -14,8 +14,10 @@ import { TopnavModule } from './topnav/topnav.module';
 import { SidenavModule } from './sidenav/sidenav.module';
 import { LocationModule } from './location/location.module';
 import { DriverListModule } from './driverlist/driverlist.module';
+import { ChatModule } from './chat/chat.module';
 
 import { SidenavComponent } from './sidenav/index';
+import { ChatComponent } from './chat/index';
 import { TopnavComponent } from './topnav/topnav.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogconfirmComponent } from './dialogconfirm/dialogconfirm.component';
@@ -36,10 +38,11 @@ import { RouteComponent } from './route/route.component';
         TopnavModule,
         FormsModule,
         LocationModule,
-        DriverListModule
+        DriverListModule,
+        ChatModule
     ],
     entryComponents: [DialogComponent],
-    declarations: [TopnavComponent, DialogconfirmComponent, DialogchatComponent, LocationComponent, DriverlistComponent, DialogeditComponent, RouteComponent]
+    declarations: [TopnavComponent, DialogconfirmComponent, DialogchatComponent, LocationComponent, DriverlistComponent, DialogeditComponent, RouteComponent, ChatComponent]
 })
 
 export class DashboardModule { }

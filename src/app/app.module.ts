@@ -22,6 +22,9 @@ import { LoginComponent } from "./login/login.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { DriverComponent } from './dashboard/driver/driver.component';
 import { SidenavComponent } from './dashboard/sidenav/index';
+import { ChatComponent } from './dashboard/chat/index';
+import { MessagelistComponent } from './dashboard/chat/messagelist/index';
+import { MessagebubbleComponent } from './dashboard/chat/messagebubble/index';
 import { MapComponent } from './dashboard/map/index';
 import { DriverlistComponent } from './dashboard/driverlist/index';
 import { LocationComponent } from './dashboard/location/location.component';
@@ -55,6 +58,9 @@ import { routes } from './app.routes';
     SidenavComponent,
     LoginComponent,
     DashboardComponent,
+    ChatComponent,
+    MessagelistComponent,
+    MessagebubbleComponent,
     AboutComponent,
     LocationComponent,
     DriverlistComponent
@@ -80,7 +86,7 @@ import { routes } from './app.routes';
       apiKey: 'AIzaSyDbe749fuRGdvKhAm96T9-ryU0hyjmbrT0'
     })
   ],
-  entryComponents: [DialogComponent, DialogconfirmComponent, DialogchatComponent,DialogeditComponent],
+  entryComponents: [DialogComponent, DialogconfirmComponent, DialogchatComponent, DialogeditComponent],
   providers: [DriverService, MapService, UserService],
   bootstrap: [AppComponent]
 })
