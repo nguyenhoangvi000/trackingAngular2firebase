@@ -3,6 +3,7 @@ import { UserService } from '../services/userService';
 import { Router } from '@angular/router';
 import { FirebaseApp, AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import { FormsModule } from '@angular/forms';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   loginInfo: String;
 
-  constructor(private _service: UserService, private af: AngularFire, private _router: Router, private userService: UserService) {
+  constructor(private localStorage: LocalStorageService, private _service: UserService, private af: AngularFire, private _router: Router, private userService: UserService) {
     this.af.auth.logout();
     this.loginInfo = this.userService.loginMessage;
   }
@@ -30,7 +31,9 @@ export class LoginComponent implements OnInit {
         provider: AuthProviders.Password,
         method: AuthMethods.Password
       }).then((success) => {
-        this._router.navigate(['/dashboard/maps'])
+        console.log(success.auth.uid);
+        localStorage.setItem("uid", success.auth.uid);
+        this._router.navigate(['/dashboard/location'])
       }).catch((err) => {
         console.log(err);
         console.log("No nhay vo cho nay ne");

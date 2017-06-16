@@ -1,8 +1,19 @@
 .content-chat{
-    border: 1px solid #cccccc;
-    height: 200px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+  border: 1px solid #cccccc;
+  height: 350px;
+  border-radius: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.message-list{
+ 
+}
+
+.input-area{
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  padding: 10px 0px 10px 30px;
 }
 
 .example-full-width {

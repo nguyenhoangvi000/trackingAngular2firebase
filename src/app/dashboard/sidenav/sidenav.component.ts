@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MdSidenav } from '@angular/material';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/userService/index';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
   selector: 'app-sidenav',
@@ -13,10 +14,11 @@ export class SidenavComponent implements OnInit {
   @ViewChild('start')
   start: MdSidenav;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private localStorage: LocalStorageService, private userService: UserService, private router: Router) { }
 
   logout() {
     this.userService.logout();
+    localStorage.clear();
   }
 
   ngOnInit() {

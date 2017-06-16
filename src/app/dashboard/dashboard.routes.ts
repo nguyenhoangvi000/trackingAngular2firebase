@@ -16,10 +16,5 @@ export const DashboardRoutes: Route[] = [
     {
         path: "dashboard",
         component: DashboardComponent
-        // children: [
-        //     { path: 'about', component: AboutComponent },
-        //     { path: 'driver', component: DriverComponent },
-        //     { path: 'map', component: MapComponent }
-        // ]
     }
 ];

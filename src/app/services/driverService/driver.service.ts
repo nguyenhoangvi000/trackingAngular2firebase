@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-// import { Driver } from '../../models/driver/';
 import { FirebaseApp, FirebaseAuthState, AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Observable, Subject } from "rxjs/Rx";

@@ -29,6 +29,7 @@ import { MapComponent } from './dashboard/map/index';
 import { DriverlistComponent } from './dashboard/driverlist/index';
 import { LocationComponent } from './dashboard/location/location.component';
 import { AboutComponent } from './dashboard/about/about.component';
+import { RouteComponent } from './dashboard/route/route.component';
 // import { TopnavComponent } from './dashboard/topnav/topnav.component';
 import { DialogComponent } from './dashboard/dialog/index';
 import { DialogeditComponent } from './dashboard/dialogedit/index';
@@ -36,12 +37,14 @@ import { DialogconfirmComponent } from './dashboard/dialogconfirm/index';
 import { DialogchatComponent } from './dashboard/dialogchat/index';
 
 import { DriverService } from './services/driverService/driver.service';
+import { ChatService } from './services/chatService/chat.service';
 import { UserService } from './services/userService/user.service';
 import { MapService } from './services/mapService/map.service';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Ng2DropdownModule } from 'ng2-material-dropdown';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DatePickerModule } from 'ng2-datepicker';
 
 import { routes } from './app.routes';
 
@@ -57,6 +60,7 @@ import { routes } from './app.routes';
     MapComponent,
     SidenavComponent,
     LoginComponent,
+    RouteComponent,
     DashboardComponent,
     ChatComponent,
     MessagelistComponent,
@@ -73,10 +77,11 @@ import { routes } from './app.routes';
     FormsModule,
     CommonModule,
     HttpModule,
+    DatePickerModule,
     NgbModule.forRoot(),
     LocalStorageModule.withConfig({
       prefix: 'tracking-angular2firebase',
-      storageType: 'localStorage'
+      storageType: 'sessionStorage'
     }),
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(firebaseConfig),
@@ -87,7 +92,7 @@ import { routes } from './app.routes';
     })
   ],
   entryComponents: [DialogComponent, DialogconfirmComponent, DialogchatComponent, DialogeditComponent],
-  providers: [DriverService, MapService, UserService],
+  providers: [DriverService, MapService, UserService, ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

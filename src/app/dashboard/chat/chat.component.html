@@ -1,12 +1,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            <div class="message-list">
-                <md-list style="border: 1px solid #CCCCCC; border-radius: 5px" md-scroll-y>
+            <div>
+                <md-list style="border: 1px solid #CCCCCC; border-radius: 5px;" md-scroll-y>
                     <h4 align="center" md-header><strong>Tin nhắn</strong></h4>
                     <md-divider></md-divider>
-                    <md-nav-list>
-                        <a md-list-item *ngFor="let driver of driverList|async">
+                    <md-nav-list style="overflow-y: scroll; overflow-x: hidden;">
+                        <a md-list-item (click)=changeDriver(driver) *ngFor="let driver of driverList|async">
                             <h4>
                                 <md-icon md-list-icon>account_circle</md-icon>
                             </h4>
@@ -22,12 +22,14 @@
             <div class="content-chat">
                 <app-messagebubble [data]="messages"></app-messagebubble>
             </div>
-            <md-input-container class="example-full-width">
-                <input [(ngModel)]="messageValue" mdInput>
-            </md-input-container>
-            <button (click)=send() md-mini-fab>
-                <md-icon>send</md-icon>
-            </button>
+            <div class="input-area">
+                <md-input-container class="example-full-width">
+                    <input (keyup.enter)="onEnter()" placeholder="Nhập tin nhắn.." [(ngModel)]="messageValue" mdInput>
+                </md-input-container>
+                <button (click)=sendTest() md-mini-fab>
+                    <md-icon>send</md-icon>
+                </button>
+
+            </div>
         </div>
     </div>
-</div>

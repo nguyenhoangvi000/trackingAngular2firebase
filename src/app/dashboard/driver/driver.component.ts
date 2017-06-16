@@ -21,11 +21,6 @@ import { UserService } from '../../services/userService/index';
 
 export class DriverComponent implements OnInit {
 
-  // rows = [
-  //   { ordernum: '1', name: 'Austin', gender: 'Male', dob: '29/11/1995' },
-  //   { ordernum: '2', name: 'Dany', gender: 'Male', dob: '29/11/1984' },
-  //   { ordernum: '3', name: 'Molly', gender: 'Female', dob: '29/11/1986' },
-  // ];
 
   rows = [];
   elementsID = [];
