@@ -1,5 +1,5 @@
-<div *ngFor="let message of data" class="clear">
+<div *ngFor="let message of data|async" class="clear">
     <div class="from-me">
-        <p style="margin:4px"> {{message}} </p>
+        <p style="margin:4px"> {{message.messageContent}} </p>
     </div>
 </div>

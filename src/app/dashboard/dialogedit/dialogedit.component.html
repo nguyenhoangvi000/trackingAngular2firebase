@@ -1,37 +1,48 @@
 <h2 md-dialog-title>Chỉnh sửa thông tin tài xế</h2>
 <hr>
-<div md-dialog-content>
+<md-dialog-content>
   <div class="col-md-12">
     <div class="row align-items-center">
       <md-input-container color="accent">
-        <input type="text" name="name" mdInput placeholder="Họ tên">
+        <input type="text" name="name" ([ngModel])="driverObject.name" (change)="changeDriverName($event)" mdInput placeholder="Tên hiển thị">
       </md-input-container>
       <md-input-container color="accent">
-        <input type="number" mdInput placeholder="Tuổi">
-      </md-input-container>
-    </div>
-    <div class="row align-items-center">
-      <md-input-container color="accent">
-        <input mdInput placeholder="Tên xe">
-      </md-input-container>
-      <md-input-container color="accent">
-        <input mdInput placeholder="Biển số">
+        <input type="email" mdInput (change)="changeEmail($event)" placeholder="Email">
       </md-input-container>
     </div>
     <div class="row align-items-center">
       <md-input-container color="accent">
-        <input mdInput placeholder="Email">
+        <input type="text" mdInput placeholder="Họ">
+      </md-input-container>
+      <md-input-container color="accent">
+        <input type="text" mdInput placeholder="Tên đệm">
       </md-input-container>
     </div>
     <div class="row align-items-center">
       <md-input-container color="accent">
-        <input mdInput type="date" placeholder="Ngày sinh">
+        <input type="number" ([ngModel])="driverObject.age" (change)="changeDriverAge($event)" mdInput placeholder="Tuổi">
+      </md-input-container>
+      <md-input-container color="accent">
+        <input mdInput type="date" (change)="changeDriverDateofBirth($event)" placeholder="Ngày sinh">
+      </md-input-container>
+    </div>
+    <div class="row align-items-center">
+      <md-input-container color="accent">
+        <input mdInput (change)="changeCarName($event)" placeholder="Tên xe">
+      </md-input-container>
+      <md-input-container color="accent">
+        <input mdInput (change)="changeDriverLisenceNumber($event)" placeholder="Biển số">
       </md-input-container>
     </div>
   </div>
-</div>
-<div class="row align-items-center" md-dialog-actions>
-  <button color="primary" md-raised-button (click)=addDriver()><md-icon  md-font-set="material-icons">done</md-icon> <strong>Lưu</strong></button>
-  <button md-raised-button (click)="close()"><md-icon  md-font-set="material-icons">close</md-icon><strong> Hủy bỏ</strong></button>
-</div>
-<hr>
+</md-dialog-content>
+<md-dialog-actions class="float-right">
+  <div class="row">
+    <div class="col-md-6">
+      <button color="primary" md-raised-button (click)=addDriver()><md-icon  md-font-set="material-icons">done</md-icon> <strong>Chỉnh sửa</strong></button>
+    </div>
+    <div class="col-md-6">
+      <button md-raised-button (click)="close()"><md-icon  md-font-set="material-icons">close</md-icon><strong> Hủy bỏ</strong></button>
+    </div>
+  </div>
+</md-dialog-actions>

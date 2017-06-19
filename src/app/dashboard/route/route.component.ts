@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from "../../services/userService/index";
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { DriverService } from "../../services/driverService/index";
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 
@@ -15,7 +15,7 @@ export class RouteComponent implements OnInit {
   date: DateModel;
   options: DatePickerOptions;
 
-  constructor(private af: AngularFire, private driverService: DriverService) {
+  constructor(private af: AngularFireDatabase, private driverService: DriverService) {
     this.driverService = driverService;
     this.driverList = driverService.getAllDriver();
     this.options = new DatePickerOptions();

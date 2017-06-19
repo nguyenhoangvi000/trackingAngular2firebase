@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { SebmGoogleMap, SebmGoogleMapPolygon, LatLngLiteral } from 'angular2-google-maps/core';
 import { DriverService } from '../../services/driverService/index';
 
@@ -19,8 +19,8 @@ export class DriverlistComponent implements OnInit {
   currentLat: number;
   currentLng: number;
 
-  constructor(private af: AngularFire, private driverService: DriverService, private ngZone: NgZone) {
-    console.log(driverService);
+  constructor(private af: AngularFireDatabase, private driverService: DriverService, private ngZone: NgZone) {
+    // console.log(driverService);
   }
 
   ngOnInit() {
@@ -30,13 +30,13 @@ export class DriverlistComponent implements OnInit {
   }
 
   changeDriver(driver) {
-    console.log(driver.$key);
+    // console.log(driver.$key);
     let driverKey = '/geolocationCurrents/' + driver.$key;
     this.driverService.passingDriverId(driver.$key);
-    this.geolocationCurrents = this.af.database.list(driverKey);
+    this.geolocationCurrents = this.af.list(driverKey);
     console.log(driverKey);
 
-    let positionCurrent = this.af.database.object(driverKey, { preserveSnapshot: true });
+    let positionCurrent = this.af.object(driverKey, { preserveSnapshot: true });
     positionCurrent.subscribe(snapshot => {
       let currentPos = [];
       snapshot.forEach(element => {

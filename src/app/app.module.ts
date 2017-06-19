@@ -10,9 +10,12 @@ import { RouterModule } from '@angular/router';
 import { AppComponent, PageNotFoundComponent } from './app.component';
 
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+
 import { firebaseConfig } from './../environments/firebase.config';
 import { MaterialModule } from '@angular/material';
-import { MdDataTableModule } from 'ng2-md-datatable';
+// import { MdDataTableModule } from 'ng2-md-datatable';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocalStorageModule } from 'angular-2-local-storage';
@@ -37,13 +40,12 @@ import { DialogconfirmComponent } from './dashboard/dialogconfirm/index';
 import { DialogchatComponent } from './dashboard/dialogchat/index';
 
 import { DriverService } from './services/driverService/driver.service';
-import { ChatService } from './services/chatService/chat.service';
 import { UserService } from './services/userService/user.service';
 import { MapService } from './services/mapService/map.service';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Ng2DropdownModule } from 'ng2-material-dropdown';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DatePickerModule } from 'ng2-datepicker';
 
 import { routes } from './app.routes';
@@ -78,21 +80,21 @@ import { routes } from './app.routes';
     CommonModule,
     HttpModule,
     DatePickerModule,
-    NgbModule.forRoot(),
     LocalStorageModule.withConfig({
       prefix: 'tracking-angular2firebase',
       storageType: 'sessionStorage'
     }),
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(firebaseConfig),
-    MaterialModule.forRoot(),
-    MdDataTableModule.forRoot(),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    MaterialModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDbe749fuRGdvKhAm96T9-ryU0hyjmbrT0'
+      apiKey: 'AIzaSyDy8rc5lBPawVNc9-UuyraxoXnzp9BNpOM'
     })
   ],
   entryComponents: [DialogComponent, DialogconfirmComponent, DialogchatComponent, DialogeditComponent],
-  providers: [DriverService, MapService, UserService, ChatService],
+  providers: [DriverService, MapService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

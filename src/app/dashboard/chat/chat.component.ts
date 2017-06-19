@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessagebubbleComponent } from './messagebubble/index';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { UserService } from "../../services/userService/index";
 import { DriverService } from "../../services/driverService/index";
-import { ChatService } from "../../services/chatService/index";
+// import { ChatService } from "../../services/chatService/index";
 import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
@@ -14,13 +14,14 @@ import { LocalStorageService } from 'angular-2-local-storage';
 })
 export class ChatComponent implements OnInit {
 
-    messages: Array<String> = [];
+    messages: FirebaseListObservable<any[]>;
+    messagesReverse: FirebaseListObservable<any[]>;
     messageValue: String = "";
     uidCurrent: String = "";
 
     driverList: FirebaseListObservable<any[]>;
 
-    constructor(private localStorage: LocalStorageService, private af: AngularFire, private driverService: DriverService, private chatService: ChatService) {
+    constructor(private localStorage: LocalStorageService, private af: AngularFireDatabase, private driverService: DriverService) {
         this.driverService = driverService;
         this.driverList = driverService.getAllDriver();
         // this.uidCurrent = this.driverList.first().$key;
@@ -28,45 +29,43 @@ export class ChatComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        
     }
 
     sendTest() {
-        console.log(localStorage.getItem("uid"));
+        console.log(this.messageValue);
+        let messageContent = { messageContent: this.messageValue };
         if (this.messageValue != "") {
-            this.messages.push(new String(this.messageValue));
+            this.messages.push(messageContent);
+            this.messagesReverse.push(messageContent);
             this.messageValue = "";
         }
-
     }
 
     send(to, message) {
-        this.chatService.sendMessage(this.uidCurrent, this.messageValue);
         console.log(this.messageValue);
+        let messageContent = { messageContent: this.messageValue };
         if (this.messageValue != "") {
-            this.messages.push(new String(this.messageValue));
+            this.messages.push(messageContent);
             this.messageValue = "";
         }
-
     }
 
     changeDriver(driver) {
-        this.uidCurrent = driver.$key;
-        console.log(this.uidCurrent);
-        let messageKey = "/messages/" + driver.$key;
-        let messageList = this.af.database.list(messageKey);
-        messageList.forEach(element => {
 
-        })
+        this.uidCurrent = "/messages/" + this.localStorage.get("uid") + "/" + driver.$key;
+        console.log(this.uidCurrent);
+        this.messages = this.af.list(this.uidCurrent.toString());
+        this.messagesReverse = this.af.list("/messages/" + driver.$key + "/" + this.localStorage.get("uid"));
+
     }
 
     onEnter() {
-        this.chatService.sendMessage(this.uidCurrent, this.messageValue);
         console.log(this.messageValue);
-        // console.log(localStorage.getItem("uid"));
-        // console.log(message);
+        let messageContent = { messageContent: this.messageValue };
         if (this.messageValue != "") {
-            this.messages.push(new String(this.messageValue));
+            this.messages.push(messageContent);
+            this.messagesReverse.push(messageContent);
             this.messageValue = "";
         }
     }

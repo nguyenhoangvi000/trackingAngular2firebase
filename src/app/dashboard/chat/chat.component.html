@@ -24,7 +24,8 @@
             </div>
             <div class="input-area">
                 <md-input-container class="example-full-width">
-                    <input (keyup.enter)="onEnter()" placeholder="Nhập tin nhắn.." [(ngModel)]="messageValue" mdInput>
+                    <input (keyup.enter)="onEnter()" placeholder="Nhập tin nhắn.." [(ngModel)]="messageValue" [ngModelOptions]="{standalone:true}"
+                        mdInput>
                 </md-input-container>
                 <button (click)=sendTest() md-mini-fab>
                     <md-icon>send</md-icon>

@@ -1,5 +1,7 @@
 import { Component, OnInit, NgZone, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { SebmGoogleMap, SebmGoogleMapPolygon, LatLngLiteral } from 'angular2-google-maps/core';
 import { DriverService } from '../../services/driverService/index';
 import { Observable, Subject } from "rxjs/Rx";
@@ -16,43 +18,58 @@ export class MapComponent implements OnInit {
 
   @Input('driverID') driverID: string;
 
-  currentLat: number;
-  currentLng: number;
+  currentLat: number = 0;
+  currentLng: number = 0;
 
-  constructor(private af: AngularFire, private driverService: DriverService, private ngZone: NgZone) {
+  constructor(private af: AngularFireDatabase, private driverService: DriverService, private ngZone: NgZone) {
     // this.geolocationCurrents = af.database.list('/geolocationCurrents')
 
     this.driverCurrents = driverService.getAllDriver();
-    console.log(driverService);
+
+    // navigator.geolocation.getCurrentPosition(function (location) {
+    //   this.currentLat = location.coords.latitude;
+    //   this.currentLng = location.coords.longitude;
+    // });
+    // console.log(driverService);
 
   }
 
 
-  ngOnInit() {
+  ngOnInit(): void {
+    console.log("Da nhay vao onInit");
+
     this.driverService.onPassingDriverID().subscribe((driverID) => {
       console.log(driverID);
       var driverKey = '/geolocationCurrents/' + driverID;
-      this.geolocationCurrents = this.af.database.list(driverKey);
       console.log(driverKey);
+      this.geolocationCurrents = this.af.list(driverKey);
 
-      let positionCurrent = this.af.database.object(driverKey, { preserveSnapshot: true });
+      let positionCurrent = this.af.object(driverKey, { preserveSnapshot: true });
       positionCurrent.subscribe(snapshot => {
         let currentPos = [];
         snapshot.forEach(element => {
+          console.log(element);
           currentPos.push(element);
         });
+
+        console.log(currentPos[currentPos.length - 1]);
 
         this.currentLat = currentPos[currentPos.length - 1].val().lat;
         this.currentLng = currentPos[currentPos.length - 1].val().lng;
 
+        console.log(this.currentLat);
+        console.log(this.currentLng);
+
       })
     })
+
+
   }
 
 
 
 
-  
+
   // changeDriver(driver) {
   //   console.log(driver.$key);
   //   var driverKey = '/geolocationCurrents/' + driver.$key;

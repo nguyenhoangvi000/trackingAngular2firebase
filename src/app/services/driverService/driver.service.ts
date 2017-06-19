@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { FirebaseApp, FirebaseAuthState, AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Observable, Subject } from "rxjs/Rx";
 
@@ -11,15 +13,15 @@ export class DriverService {
   currentDriver: FirebaseListObservable<any[]>;
 
 
-  constructor(private af: AngularFire, private localStorage: LocalStorageService) {
+  constructor(private af: AngularFireDatabase, private afAuth: AngularFireAuth, private localStorage: LocalStorageService) {
     this.idDriverTemp = new Subject<string>();
-    this.currentDriver = af.database.list('/drivers');
+    this.currentDriver = af.list('/drivers');
 
   }
 
   logout() {
-    this.af.auth.logout();
-    this.af.auth.unsubscribe();
+    this.afAuth.auth.signOut();
+    // this.afAuth.auth.app;
   }
 
   getAllDriver() {
@@ -43,17 +45,17 @@ export class DriverService {
 
   registerDriver(driver: Driver, Email: String) {
 
-    this.af.auth.createUser({
-      email: Email.toString(),
-      password: "123456"
-    }).then(response => {
+    this.afAuth.auth.createUserWithEmailAndPassword(
+      Email.toString(),
+      "123456"
+    ).then(response => {
       while (response == null) {
         setInterval(100);
       }
       this.idDriver = response.auth.uid.toString();
       this.localStorage.set("idDriver", this.idDriver);
-      const newDriver = this.af.database.object('/drivers/' + this.idDriver);
-      newDriver.set(driver);
+      const newDriver = this.af.list('/drivers/' + this.idDriver);
+      newDriver.push(driver);
       console.log(this.localStorage.get("idDriver"));
     })
   }
@@ -68,7 +70,7 @@ export class DriverService {
 
   addDriver(driver: Driver, idDriver: any) {
     console.log('/drivers/' + this.idDriver.toString());
-    const newDriver = this.af.database.object('/drivers/' + this.idDriver);
+    const newDriver = this.af.object('/drivers/' + this.idDriver);
     newDriver.set(driver);
   }
 

@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import { DriverService } from '../../services/driverService/index';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database'; import { DriverService } from '../../services/driverService/index';
 import { DialogComponent } from '../dialog/dialog.component';
 import { DialogconfirmComponent } from '../dialogconfirm/index';
 import { DialogchatComponent } from '../dialogchat/index';
@@ -13,11 +14,7 @@ import { UserService } from '../../services/userService/index';
   templateUrl: './driver.component.html'
 })
 
-// export class Driver {
-//   name: String;
-//   dob: Date;
-//   gender: String;
-// }
+
 
 export class DriverComponent implements OnInit {
 
@@ -27,34 +24,22 @@ export class DriverComponent implements OnInit {
   driverTemp: any;
   isDataAvailable: boolean = false;
 
-  // columns = [
-  //   { prop: 'Họ và tên' },
-  //   { name: 'Gender' },
-  //   { name: 'Company' }
-  // ];
-
-  //rows: any[];
-
-  // driver: Driver;
 
   driverCurrents: FirebaseListObservable<any[]>;
 
-  constructor(public dialog: MdDialog, af: AngularFire, private driverService: DriverService) {
+  constructor(public dialog: MdDialog, af: AngularFireDatabase, private driverService: DriverService) {
 
 
-    // driverService.getAllDriver().forEach(driver => ({
 
-    // }))
 
   }
 
   openDialog() {
-    // let dialogRef = this.dialog.open(DialogResultExampleDialog);
 
     let dialogRef = this.dialog.open(DialogComponent);
 
     dialogRef.afterClosed().subscribe((result: string) => {
-      
+
     });
   }
 
@@ -82,10 +67,13 @@ export class DriverComponent implements OnInit {
         setInterval(10);
       }
       this.rows = driver;
-
+      let index = 0;
       driver.forEach((item) => {
+        this.rows[index].id = index + 1;
         this.elementsID.push(item.$key);
+        index++;
       })
+
       this.isDataAvailable = true;
     });
   }
