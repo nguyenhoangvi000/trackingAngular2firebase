@@ -19,24 +19,35 @@ export class ChatComponent implements OnInit {
     messageValue: String = "";
     uidCurrent: String = "";
 
-    driverList: FirebaseListObservable<any[]>;
+    driverList: any[];
 
     constructor(private localStorage: LocalStorageService, private af: AngularFireDatabase, private driverService: DriverService) {
         this.driverService = driverService;
-        this.driverList = driverService.getAllDriver();
+
         // this.uidCurrent = this.driverList.first().$key;
-        console.log(this.driverList.first());
+        // console.log(this.driverList.first());
     }
 
     ngOnInit() {
-        
+        this.driverService.getAllDriver().forEach(driver => {
+            let index = 0;
+            driver.forEach(element => {
+                if (element.$key == localStorage.getItem("uid")) {
+                    driver.splice(index, 1);
+                }
+                index++;
+            })
+
+            this.driverList = driver;
+        })
     }
 
     sendTest() {
         console.log(this.messageValue);
-        let messageContent = { messageContent: this.messageValue };
+        let messageContent = { messageContent: this.messageValue, date: Date.now(), messagebubble: "S" };
         if (this.messageValue != "") {
             this.messages.push(messageContent);
+            messageContent.messagebubble = "R";
             this.messagesReverse.push(messageContent);
             this.messageValue = "";
         }
@@ -44,9 +55,11 @@ export class ChatComponent implements OnInit {
 
     send(to, message) {
         console.log(this.messageValue);
-        let messageContent = { messageContent: this.messageValue };
+        let messageContent = { messageContent: this.messageValue, date: Date.now(), messagebubble: "S" };
         if (this.messageValue != "") {
             this.messages.push(messageContent);
+            messageContent.messagebubble = "R";
+            this.messagesReverse.push(messageContent);
             this.messageValue = "";
         }
     }
@@ -62,9 +75,10 @@ export class ChatComponent implements OnInit {
 
     onEnter() {
         console.log(this.messageValue);
-        let messageContent = { messageContent: this.messageValue };
+        let messageContent = { messageContent: this.messageValue, date: Date.now(), messagebubble: "S" };
         if (this.messageValue != "") {
             this.messages.push(messageContent);
+            messageContent.messagebubble = "R";
             this.messagesReverse.push(messageContent);
             this.messageValue = "";
         }

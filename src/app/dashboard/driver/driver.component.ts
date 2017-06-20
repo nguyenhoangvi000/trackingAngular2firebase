@@ -8,6 +8,7 @@ import { DialogconfirmComponent } from '../dialogconfirm/index';
 import { DialogchatComponent } from '../dialogchat/index';
 import { DialogeditComponent } from '../dialogedit/index';
 import { UserService } from '../../services/userService/index';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
   selector: 'app-driver',
@@ -27,10 +28,7 @@ export class DriverComponent implements OnInit {
 
   driverCurrents: FirebaseListObservable<any[]>;
 
-  constructor(public dialog: MdDialog, af: AngularFireDatabase, private driverService: DriverService) {
-
-
-
+  constructor(private localStorage: LocalStorageService, public dialog: MdDialog, af: AngularFireDatabase, private driverService: DriverService) {
 
   }
 
@@ -52,73 +50,42 @@ export class DriverComponent implements OnInit {
   chat() {
 
     let dialogRef = this.dialog.open(DialogchatComponent);
-
   }
 
-  delete(key) {
-    console.log(key);
-    this.driverService.idDriver = key;
+  delete(value) {
+    console.log(value);
+    this.driverService.idDriver = value;
     let dialogRef = this.dialog.open(DialogconfirmComponent);
   }
 
   ngOnInit() {
+    console.log(localStorage.getItem("uid"));
     this.driverService.getAllDriver().forEach(driver => {
       while (driver == null) {
         setInterval(10);
       }
-      this.rows = driver;
+
       let index = 0;
       driver.forEach((item) => {
-        this.rows[index].id = index + 1;
-        this.elementsID.push(item.$key);
+        if (item.$key == localStorage.getItem("uid")) {
+          driver.splice(index, 1);
+          console.log("It's work");
+        }
+        else {
+          this.elementsID.push(item.$key);
+        }
         index++;
       })
+      this.rows = driver;
+
+      let length = index;
+      for (var index1 = 0; index1 < length; index1++) {
+        this.rows[index1].id = index1 + 1;
+      }
 
       this.isDataAvailable = true;
     });
   }
 
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-// @Component({
-//   selector: 'dialog-result-adddriver',
-//   template: `<p>It's Jazz!</p>
-//   <p><label>How much? <input #howMuch></label></p>
-//   <p> {{ data.message }} </p>
-//   <button type="button" (click)="dialogRef.close(howMuch.value)">Close dialog</button>
-//   <button (click)="togglePosition()">Change dimensions</button>`
-
-// })
-// export class DialogResultExampleDialog {
-//   private _dimesionToggle = false;
-
-//   constructor(
-//     public dialogRef: MdDialogRef<DialogResultExampleDialog>,
-//     @Inject(MD_DIALOG_DATA) public data: any) { }
-
-//   togglePosition(): void {
-//     this._dimesionToggle = !this._dimesionToggle;
-
-//     if (this._dimesionToggle) {
-//       this.dialogRef
-//         .updateSize('500px', '500px')
-//         .updatePosition({ top: '25px', left: '25px' });
-//     } else {
-//       this.dialogRef
-//         .updateSize()
-//         .updatePosition();
-//     }
-//   }
-// }

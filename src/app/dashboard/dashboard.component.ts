@@ -4,6 +4,7 @@ import { Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/ro
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { UserService } from './../services/userService/index';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { MdDatepickerModule } from '@angular/material';
 
 
 import { MdSidenav } from '@angular/material';
@@ -33,7 +34,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       else {
         localStorage.set("uid", this.af.auth.currentUser.uid);
         console.log('Logged In');
-        this.router.navigate(['/dashboard/driver']);
+        this.router.navigate(['/dashboard/route']);
         this.isLoggedIn = true;
       }
     })

@@ -52,10 +52,11 @@ export class DriverService {
       while (response == null) {
         setInterval(100);
       }
-      this.idDriver = response.auth.uid.toString();
-      this.localStorage.set("idDriver", this.idDriver);
-      const newDriver = this.af.list('/drivers/' + this.idDriver);
-      newDriver.push(driver);
+      console.log(response);
+      this.idDriver = response.uid.toString();
+      // this.localStorage.set("idDriver", this.idDriver);
+      const newDriver = this.af.object('/drivers/' + this.idDriver);
+      newDriver.set(driver);
       console.log(this.localStorage.get("idDriver"));
     })
   }
@@ -75,7 +76,8 @@ export class DriverService {
   }
 
   removeDriver() {
-    this.currentDriver.remove(this.idDriver)
+    this.currentDriver.remove(this.idDriver);
+    this.afAuth.auth.currentUser.delete();
   }
 
 }

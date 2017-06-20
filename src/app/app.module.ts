@@ -14,7 +14,7 @@ import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable 
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
 import { firebaseConfig } from './../environments/firebase.config';
-import { MaterialModule } from '@angular/material';
+import { MaterialModule, MdNativeDateModule } from '@angular/material';
 // import { MdDataTableModule } from 'ng2-md-datatable';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -74,6 +74,7 @@ import { routes } from './app.routes';
 
   imports: [
     NgxDatatableModule,
+    MdNativeDateModule,
     Ng2DropdownModule,
     BrowserAnimationsModule,
     FormsModule,

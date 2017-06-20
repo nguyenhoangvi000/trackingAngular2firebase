@@ -19,6 +19,11 @@ export class DialogComponent implements OnInit {
     name: "",
     age: "",
     licensePlace: "",
+    status: false,
+    firstName: "",
+    lastName: "",
+    lastestMessage: "",
+    role: "driver",
     dob: "",
     carName: "",
     Email: ""
@@ -57,6 +62,14 @@ export class DialogComponent implements OnInit {
     this.driverObject.name = event.target.value;
   }
 
+  changeDriverFirstName(event) {
+    this.driverObject.firstName = event.target.value;
+  }
+
+  changeDriverLastName(event) {
+    this.driverObject.lastName = event.target.value;
+  }
+
   changeDriverAge(event) {
     this.driverObject.age = event.target.value;
   }
@@ -90,6 +103,11 @@ export class Driver {
   name: string;
   age: number;
   licensePlace: string;
+  role: string;
+  status: boolean;
+  firstName: string;
+  lastName: string;
+  lastestMessage: string;
   dob: Date;
   carName: string;
   Email: string;

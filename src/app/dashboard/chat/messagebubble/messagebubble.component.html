@@ -1,5 +1,8 @@
 <div *ngFor="let message of data|async" class="clear">
-    <div class="from-me">
+    <div *ngIf='message.messagebubble=="S"' class="from-me">
         <p style="margin:4px"> {{message.messageContent}} </p>
+    </div>
+    <div *ngIf='message.messagebubble=="R"' class="from-them">
+        <p> {{message.messageContent}} </p>
     </div>
 </div>

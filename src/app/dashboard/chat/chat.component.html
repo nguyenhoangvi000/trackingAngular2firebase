@@ -6,13 +6,23 @@
                     <h4 align="center" md-header><strong>Tin nhắn</strong></h4>
                     <md-divider></md-divider>
                     <md-nav-list style="overflow-y: scroll; overflow-x: hidden;">
-                        <a md-list-item (click)=changeDriver(driver) *ngFor="let driver of driverList|async">
-                            <h4>
-                                <md-icon md-list-icon>account_circle</md-icon>
-                            </h4>
-                            <h4 md-line><strong> {{driver.name}}</strong></h4>
-                            <p md-line> Tin nhan 1 </p>
-                        </a>
+                        <md-list-item (click)=changeDriver(driver) *ngFor="let driver of driverList">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                       <div id="avatar"></div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <h6 md-line><strong>{{driver.name}}</strong></h6>
+                                        <p md-line> {{driver.lastestMessage}} </p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <span style="color:#00E676" *ngIf="driver.status">&nbsp;&nbsp;<i class="material-icons">done</i></span>
+                                        <span style="color:#FF1744" *ngIf="!driver.status">&nbsp;&nbsp;<i class="material-icons">highlight_off</i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </md-list-item>
                     </md-nav-list>
                     <md-divider></md-divider>
                 </md-list>

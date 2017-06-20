@@ -35,9 +35,10 @@
             {{value}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Trạng thái" prop="state" [flexGrow]="1">
+        <ngx-datatable-column name="Trạng thái" prop="status" [flexGrow]="1">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            <md-slide-toggle [checked]="false"></md-slide-toggle>
+            <span style="color:#00E676" *ngIf="value">&nbsp;&nbsp;<i class="material-icons">done</i></span>
+            <span style="color:#FF1744" *ngIf="!value">&nbsp;&nbsp;<i class="material-icons">highlight_off</i></span>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Thao tác" prop="$key" [flexGrow]="4">

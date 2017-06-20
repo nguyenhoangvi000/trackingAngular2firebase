@@ -11,7 +11,8 @@ import { DriverService } from '../../services/driverService/index';
 export class DriverlistComponent implements OnInit {
 
   geolocationCurrents: FirebaseListObservable<any[]>;
-  driverCurrents: FirebaseListObservable<any[]>;
+  // driverCurrents: FirebaseListObservable<any[]>;
+  driverCurrents: any[];
 
   driverID: string = '';
 
@@ -25,7 +26,18 @@ export class DriverlistComponent implements OnInit {
 
   ngOnInit() {
     if (this.driverCurrents == null) {
-      this.driverCurrents = this.driverService.getAllDriver();
+      // this.driverCurrents = this.driverService.getAllDriver();
+      this.driverService.getAllDriver().forEach(driver => {
+        let index = 0;
+        driver.forEach(element => {
+          if (element.$key == localStorage.getItem("uid")) {
+            driver.splice(index, 1);
+          }
+          index++;
+        })
+
+        this.driverCurrents = driver;
+      })
     }
   }
 

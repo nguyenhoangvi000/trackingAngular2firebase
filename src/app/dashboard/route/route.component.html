@@ -12,7 +12,11 @@
                 <p md-line>Trạng thái 1 </p>
               </div>
               <div class="col-md-2 col-sm-3">
-                <ng2-datepicker></ng2-datepicker>
+                <md-input-container>
+                  <input mdInput [mdDatepicker]="picker" placeholder="Choose a date">
+                  <button mdSuffix [mdDatepickerToggle]="picker"></button>
+                </md-input-container>
+                <md-datepicker #picker></md-datepicker>
               </div>
             </md-list-item>
           </md-nav-list>
