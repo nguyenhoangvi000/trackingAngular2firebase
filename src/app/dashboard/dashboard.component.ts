@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       else {
         localStorage.set("uid", this.af.auth.currentUser.uid);
         console.log('Logged In');
-        this.router.navigate(['/dashboard/location']);
+        this.router.navigate(['/dashboard/driver']);
         this.isLoggedIn = true;
       }
     })

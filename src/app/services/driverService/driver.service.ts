@@ -75,6 +75,12 @@ export class DriverService {
     newDriver.set(driver);
   }
 
+  editDriver(driver: Driver, idDriver: any) {
+    console.log('/drivers/' + this.idDriver.toString());
+    const newDriver = this.af.object('/drivers/' + this.idDriver);
+    newDriver.update(driver);
+  }
+
   removeDriver() {
     this.currentDriver.remove(this.idDriver);
     this.afAuth.auth.currentUser.delete();

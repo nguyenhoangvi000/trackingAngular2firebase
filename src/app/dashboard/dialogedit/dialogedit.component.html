@@ -4,34 +4,34 @@
   <div class="col-md-12">
     <div class="row align-items-center">
       <md-input-container color="accent">
-        <input type="text" name="name" ([ngModel])="driverObject.name" (change)="changeDriverName($event)" mdInput placeholder="Tên hiển thị">
+        <input type="text" value="{{driverObject.name}}" name="name" mdInput placeholder="Tên hiển thị">
       </md-input-container>
       <md-input-container color="accent">
-        <input type="email" mdInput (change)="changeEmail($event)" placeholder="Email">
-      </md-input-container>
-    </div>
-    <div class="row align-items-center">
-      <md-input-container color="accent">
-        <input type="text" mdInput placeholder="Họ">
-      </md-input-container>
-      <md-input-container color="accent">
-        <input type="text" mdInput placeholder="Tên đệm">
+        <input type="email" value="{{driverObject.Email}}" mdInput placeholder="Email">
       </md-input-container>
     </div>
     <div class="row align-items-center">
       <md-input-container color="accent">
-        <input type="number" ([ngModel])="driverObject.age" (change)="changeDriverAge($event)" mdInput placeholder="Tuổi">
+        <input type="text" value="{{driverObject.firstName}}" mdInput placeholder="Họ">
       </md-input-container>
       <md-input-container color="accent">
-        <input mdInput type="date" (change)="changeDriverDateofBirth($event)" placeholder="Ngày sinh">
+        <input type="text" value="{{driverObject.lastName}}" mdInput placeholder="Tên đệm">
       </md-input-container>
     </div>
     <div class="row align-items-center">
       <md-input-container color="accent">
-        <input mdInput (change)="changeCarName($event)" placeholder="Tên xe">
+        <input type="number" value="{{driverObject.age}}" mdInput placeholder="Tuổi">
       </md-input-container>
       <md-input-container color="accent">
-        <input mdInput (change)="changeDriverLisenceNumber($event)" placeholder="Biển số">
+        <input mdInput value="{{driverObject.dob}}" type="date" placeholder="Ngày sinh">
+      </md-input-container>
+    </div>
+    <div class="row align-items-center">
+      <md-input-container color="accent">
+        <input mdInput value="{{driverObject.carName}}" placeholder="Tên xe">
+      </md-input-container>
+      <md-input-container color="accent">
+        <input mdInput value="{{driverObject.licensePlace}}" placeholder="Biển số">
       </md-input-container>
     </div>
   </div>
@@ -39,7 +39,7 @@
 <md-dialog-actions class="float-right">
   <div class="row">
     <div class="col-md-6">
-      <button color="primary" md-raised-button (click)=addDriver()><md-icon  md-font-set="material-icons">done</md-icon> <strong>Chỉnh sửa</strong></button>
+      <button color="primary" md-raised-button (click)=editDriver()><md-icon  md-font-set="material-icons">done</md-icon> <strong>Chỉnh sửa</strong></button>
     </div>
     <div class="col-md-6">
       <button md-raised-button (click)="close()"><md-icon  md-font-set="material-icons">close</md-icon><strong> Hủy bỏ</strong></button>

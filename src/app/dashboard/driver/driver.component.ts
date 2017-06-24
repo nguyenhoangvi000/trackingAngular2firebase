@@ -42,10 +42,11 @@ export class DriverComponent implements OnInit {
     });
   }
 
-  edit(key) {
-    console.log(key);
+  edit(value) {
+    console.log(value);
     let dialogRef = this.dialog.open(DialogeditComponent);
-
+    this.driverService.idDriver = value;
+    
   }
 
   chat() {

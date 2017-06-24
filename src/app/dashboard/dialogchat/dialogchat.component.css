@@ -1,0 +1,14 @@
+md-dialog-content{
+    width:793px;
+    height: 521px;
+}
+
+.profile{
+    margin: 10px 20px 15px 30px;
+}
+
+.profile-list{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
