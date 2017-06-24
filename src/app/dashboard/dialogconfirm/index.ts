@@ -1,1 +1,0 @@
-export *  from "./dialogconfirm.component";

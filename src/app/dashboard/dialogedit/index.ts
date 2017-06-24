@@ -1,1 +1,0 @@
-export * from './dialogedit.component';
