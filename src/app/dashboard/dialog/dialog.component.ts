@@ -3,6 +3,8 @@ import { MdDialogRef } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { DriverService } from '../../services/driverService/index';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+
 // import { Driver } from '../../models/driver/';
 
 
@@ -34,7 +36,7 @@ export class DialogComponent implements OnInit {
 
 
 
-  constructor(public dialogRef: MdDialogRef<any>, private driverService: DriverService, private localStorage: LocalStorageService) { }
+  constructor(private toastCtrl: ToastsManager,public dialogRef: MdDialogRef<any>, private driverService: DriverService, private localStorage: LocalStorageService) { }
 
   ngOnInit() {
 

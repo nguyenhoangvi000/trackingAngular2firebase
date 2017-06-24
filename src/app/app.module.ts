@@ -14,7 +14,7 @@ import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable 
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
 import { firebaseConfig } from './../environments/firebase.config';
-import { MaterialModule, MdNativeDateModule } from '@angular/material';
+import { MaterialModule, MdNativeDateModule, MdToolbarModule, MdIconModule, MdIconRegistry } from '@angular/material';
 // import { MdDataTableModule } from 'ng2-md-datatable';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -45,6 +45,7 @@ import { MapService } from './services/mapService/map.service';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Ng2DropdownModule } from 'ng2-material-dropdown';
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DatePickerModule } from 'ng2-datepicker';
 
@@ -90,12 +91,18 @@ import { routes } from './app.routes';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     MaterialModule,
+    MdToolbarModule,
+    MdIconModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDy8rc5lBPawVNc9-UuyraxoXnzp9BNpOM'
-    })
+    }),
+    ToastModule.forRoot()
   ],
   entryComponents: [DialogComponent, DialogconfirmComponent, DialogchatComponent, DialogeditComponent],
-  providers: [DriverService, MapService, UserService],
-  bootstrap: [AppComponent]
+  providers: [DriverService, MapService, UserService, MdIconRegistry],
+  bootstrap: [AppComponent],
+  exports: [
+    MaterialModule
+  ]
 })
 export class AppModule { }

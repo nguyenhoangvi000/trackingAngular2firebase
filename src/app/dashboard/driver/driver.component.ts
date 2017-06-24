@@ -9,6 +9,7 @@ import { DialogchatComponent } from '../dialogchat/index';
 import { DialogeditComponent } from '../dialogedit/index';
 import { UserService } from '../../services/userService/index';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'app-driver',
@@ -28,7 +29,7 @@ export class DriverComponent implements OnInit {
 
   driverCurrents: FirebaseListObservable<any[]>;
 
-  constructor(private localStorage: LocalStorageService, public dialog: MdDialog, af: AngularFireDatabase, private driverService: DriverService) {
+  constructor(private toastCtrl: ToastsManager, private localStorage: LocalStorageService, public dialog: MdDialog, af: AngularFireDatabase, private driverService: DriverService) {
 
   }
 

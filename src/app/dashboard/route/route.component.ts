@@ -13,22 +13,36 @@ import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 })
 export class RouteComponent implements OnInit {
 
-  driverList: FirebaseListObservable<any[]>;
+
+
+  driverList: any[];
   date: DateModel;
   options: DatePickerOptions;
 
   constructor(private af: AngularFireDatabase, private driverService: DriverService) {
     this.driverService = driverService;
-    this.driverList = driverService.getAllDriver();
+    // this.driverList = driverService.getAllDriver();
     this.options = new DatePickerOptions();
   }
 
   ngOnInit() {
+    this.driverService.getAllDriver().forEach(driver => {
+      let index = 0;
+      driver.forEach(element => {
+        if (element.$key == localStorage.getItem("uid")) {
+          driver.splice(index, 1);
+        }
+        index++;
+      })
 
+      this.driverList = driver;
+    })
   }
 
   changeDriver(driver) {
-
+    console.log(driver.$key);
   }
+
+
 
 }

@@ -45,27 +45,34 @@ export class DriverlistComponent implements OnInit {
     // console.log(driver.$key);
     let driverKey = '/geolocationCurrents/' + driver.$key;
     this.driverService.passingDriverId(driver.$key);
-    this.geolocationCurrents = this.af.list(driverKey);
-    console.log(driverKey);
-
-    let positionCurrent = this.af.object(driverKey, { preserveSnapshot: true });
-    positionCurrent.subscribe(snapshot => {
-      let currentPos = [];
-      snapshot.forEach(element => {
-        currentPos.push(element);
-      })
-      if (currentPos != null) {
-        this.currentLat = currentPos[currentPos.length - 1].val().lat;
-        this.currentLng = currentPos[currentPos.length - 1].val().lng;
-      };
-    })
-
-    // navigator.geolocation.watchPosition((position) => {
-    //   this.currentLat = position.coords.latitude;
-    //   this.currentLng = position.coords.longitude;
-    //   console.log(this.currentLat + ":" + this.currentLng);
-    // })
-
   }
+
+  // changeDriver(driver) {
+  //   // console.log(driver.$key);
+  //   let driverKey = '/geolocationCurrents/' + driver.$key;
+  //   this.driverService.passingDriverId(driver.$key);
+  //   this.geolocationCurrents = this.af.list(driverKey);
+  //   console.log(driverKey);
+
+  //   let positionCurrent = this.af.object(driverKey, { preserveSnapshot: true });
+  //   positionCurrent.subscribe(snapshot => {
+  //     let currentPos = [];
+  //     snapshot.forEach(element => {
+  //       currentPos.push(element);
+  //     })
+
+  //     if (currentPos != null) {
+  //       this.currentLat = currentPos[currentPos.length - 1].val().lat;
+  //       this.currentLng = currentPos[currentPos.length - 1].val().lng;
+  //     };
+  //   })
+
+  //   // navigator.geolocation.watchPosition((position) => {
+  //   //   this.currentLat = position.coords.latitude;
+  //   //   this.currentLng = position.coords.longitude;
+  //   //   console.log(this.currentLat + ":" + this.currentLng);
+  //   // })
+
+  // }
 
 }
