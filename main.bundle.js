@@ -392,7 +392,7 @@ var AboutRoutes = [{
 /***/ "../../../../../src/app/dashboard/chat/chat.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-4\">\r\n            <div>\r\n                <md-list style=\"border: 1px solid #CCCCCC; border-radius: 5px;\" md-scroll-y>\r\n                    <h4 align=\"center\" md-header><strong>Tin nhắn</strong></h4>\r\n                    <md-divider></md-divider>\r\n                    <md-nav-list style=\"overflow-y: scroll; overflow-x: hidden;\">\r\n                        <md-list-item (click)=changeDriver(driver) *ngFor=\"let driver of driverList\">\r\n                            <div class=\"container\">\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-md-3\">\r\n                                       <div id=\"avatar\"></div>\r\n                                    </div>\r\n                                    <div class=\"col-md-7\">\r\n                                        <h6 md-line><strong>{{driver.name}}</strong></h6>\r\n                                        <p md-line> {{driver.lastestMessage}} </p>\r\n                                    </div>\r\n                                    <div class=\"col-md-2\">\r\n                                        <span style=\"color:#00E676\" *ngIf=\"driver.status\">&nbsp;&nbsp;<i class=\"material-icons\">done</i></span>\r\n                                        <span style=\"color:#FF1744\" *ngIf=\"!driver.status\">&nbsp;&nbsp;<i class=\"material-icons\">highlight_off</i></span>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </md-list-item>\r\n                    </md-nav-list>\r\n                    <md-divider></md-divider>\r\n                </md-list>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-md-8\">\r\n            <div class=\"content-chat\">\r\n                <app-messagebubble [data]=\"messages\"></app-messagebubble>\r\n            </div>\r\n            <div class=\"input-area\">\r\n                <md-input-container class=\"example-full-width\">\r\n                    <input (keyup.enter)=\"onEnter()\" placeholder=\"Nhập tin nhắn..\" [(ngModel)]=\"messageValue\" [ngModelOptions]=\"{standalone:true}\"\r\n                        mdInput>\r\n                </md-input-container>\r\n                <button (click)=sendTest() md-mini-fab>\r\n                    <md-icon>send</md-icon>\r\n                </button>\r\n\r\n            </div>\r\n        </div>\r\n    </div>"
+module.exports = "<div class=\"container\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-4\">\r\n            <div>\r\n                <md-list style=\"border: 1px solid #CCCCCC; border-radius: 5px;\" md-scroll-y>\r\n                    <h4 align=\"center\" md-header><strong>Tin nhắn</strong></h4>\r\n                    <md-divider></md-divider>\r\n                    <md-nav-list style=\"overflow-y: scroll; overflow-x: hidden;\">\r\n                        <md-list-item (click)=changeDriver(driver) *ngFor=\"let driver of driverList\">\r\n                            <div class=\"container\">\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-md-3\">\r\n                                        <div id=\"avatar\"></div>\r\n                                    </div>\r\n                                    <div class=\"col-md-7\">\r\n                                        <h6 md-line><strong>{{driver.name}}</strong></h6>\r\n                                        <p md-line> {{driver.lastestMessage}} </p>\r\n                                    </div>\r\n                                    <div class=\"col-md-2\">\r\n                                        <span style=\"color:#00E676\" *ngIf=\"driver.status\">&nbsp;&nbsp;<i class=\"material-icons\">done</i></span>\r\n                                        <span style=\"color:#FF1744\" *ngIf=\"!driver.status\">&nbsp;&nbsp;<i class=\"material-icons\">highlight_off</i></span>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </md-list-item>\r\n                    </md-nav-list>\r\n                    <md-divider></md-divider>\r\n                </md-list>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-md-8\">\r\n            <h4 [(ngModel)]=\"driverNameCurrent\">{{driverNameCurrent}}</h4>\r\n            <div class=\"content-chat\">\r\n                <app-messagebubble [data]=\"messages\"></app-messagebubble>\r\n            </div>\r\n            <div class=\"input-area\">\r\n                <md-input-container class=\"example-full-width\">\r\n                    <input (keyup.enter)=\"onEnter()\" placeholder=\"Nhập tin nhắn..\" [(ngModel)]=\"messageValue\" [ngModelOptions]=\"{standalone:true}\"\r\n                        mdInput>\r\n                </md-input-container>\r\n                <button (click)=sendTest() md-mini-fab>\r\n                    <md-icon>send</md-icon>\r\n                </button>\r\n\r\n            </div>\r\n        </div>\r\n    </div>"
 
 /***/ }),
 
@@ -460,6 +460,10 @@ var ChatComponent = (function () {
                 index++;
             });
             _this.driverList = driver;
+            console.log(_this.driverList[1].$key);
+            _this.uidCurrent = "/messages/" + _this.localStorage.get("uid") + "/" + _this.driverList[1].$key;
+            _this.messages = _this.af.list(_this.uidCurrent.toString());
+            _this.messagesReverse = _this.af.list("/messages/" + _this.driverList[1].$key + "/" + _this.localStorage.get("uid"));
         });
     };
     ChatComponent.prototype.sendTest = function () {
@@ -483,8 +487,12 @@ var ChatComponent = (function () {
         }
     };
     ChatComponent.prototype.changeDriver = function (driver) {
+        var _this = this;
         this.uidCurrent = "/messages/" + this.localStorage.get("uid") + "/" + driver.$key;
-        console.log(this.uidCurrent);
+        var driverNameCurrent = this.af.object("drivers/" + driver.$key);
+        driverNameCurrent.subscribe(function (item) {
+            _this.driverNameCurrent = item.name;
+        });
         this.messages = this.af.list(this.uidCurrent.toString());
         this.messagesReverse = this.af.list("/messages/" + driver.$key + "/" + this.localStorage.get("uid"));
     };
@@ -964,7 +972,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "md-dialog-content{\r\n    width:793px;\r\n    height: 521px;\r\n}\r\n\r\n.profile{\r\n    margin: 10px 20px 15px 30px;\r\n}\r\n\r\n.profile-list{\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style: none;\r\n}", ""]);
 
 // exports
 
@@ -977,7 +985,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/dialogchat/dialogchat.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 md-dialog-title>Thêm tài xế</h2>\r\n<hr>\r\n<div md-dialog-content>\r\n  <div class=\"col-md-12\">\r\n\r\n  </div>\r\n</div>\r\n<div class=\"row align-items-center\" md-dialog-actions>\r\n  <md-input-container color=\"accent\">\r\n    <input mdInput placeholder=\"Tin nhắn\">\r\n  </md-input-container>\r\n  <button color=\"primary\" md-raised-button (click)=sendMessage()><md-icon  md-font-set=\"material-icons\">done</md-icon> <strong>Gửi </strong></button>\r\n</div>\r\n<hr>"
+module.exports = "<md-dialog-content>\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-5\">\r\n      <img src=\"http://rscardwp.px-lab.com/wp-content/uploads/2015/11/robert_WP-1-299x347.jpg\" alt=\"\">\r\n    </div>\r\n    <div class=\"col-xs-7\">\r\n      <div class=\"profile\">\r\n        <h1>I'm<strong> Demo</strong></h1>\r\n      </div>\r\n      <hr/>\r\n      <ul class=\"profile-list\">\r\n        <li><strong>Name</strong><span>Test</span></li>\r\n        <li><strong>Name</strong><span>Test</span></li>\r\n        <li><strong>Name</strong><span>Test</span></li>\r\n        <li><strong>Name</strong><span>Test</span></li>\r\n      </ul>\r\n\r\n    </div>\r\n  </div>\r\n</md-dialog-content>\r\n<!--<div class=\"row align-items-center\" md-dialog-actions>\r\n  <md-input-container color=\"accent\">\r\n    <input mdInput placeholder=\"Tin nhắn\">\r\n  </md-input-container>\r\n  <button color=\"primary\" md-raised-button (click)=sendMessage()><md-icon  md-font-set=\"material-icons\">done</md-icon> <strong>Gửi </strong></button>\r\n</div>-->\r\n<hr>"
 
 /***/ }),
 
@@ -1144,7 +1152,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/dialogedit/dialogedit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2 md-dialog-title>Chỉnh sửa thông tin tài xế</h2>\r\n<hr>\r\n<md-dialog-content>\r\n  <div class=\"col-md-12\">\r\n    <div class=\"row align-items-center\">\r\n      <md-input-container color=\"accent\">\r\n        <input type=\"text\" name=\"name\" ([ngModel])=\"driverObject.name\" (change)=\"changeDriverName($event)\" mdInput placeholder=\"Tên hiển thị\">\r\n      </md-input-container>\r\n      <md-input-container color=\"accent\">\r\n        <input type=\"email\" mdInput (change)=\"changeEmail($event)\" placeholder=\"Email\">\r\n      </md-input-container>\r\n    </div>\r\n    <div class=\"row align-items-center\">\r\n      <md-input-container color=\"accent\">\r\n        <input type=\"text\" mdInput placeholder=\"Họ\">\r\n      </md-input-container>\r\n      <md-input-container color=\"accent\">\r\n        <input type=\"text\" mdInput placeholder=\"Tên đệm\">\r\n      </md-input-container>\r\n    </div>\r\n    <div class=\"row align-items-center\">\r\n      <md-input-container color=\"accent\">\r\n        <input type=\"number\" ([ngModel])=\"driverObject.age\" (change)=\"changeDriverAge($event)\" mdInput placeholder=\"Tuổi\">\r\n      </md-input-container>\r\n      <md-input-container color=\"accent\">\r\n        <input mdInput type=\"date\" (change)=\"changeDriverDateofBirth($event)\" placeholder=\"Ngày sinh\">\r\n      </md-input-container>\r\n    </div>\r\n    <div class=\"row align-items-center\">\r\n      <md-input-container color=\"accent\">\r\n        <input mdInput (change)=\"changeCarName($event)\" placeholder=\"Tên xe\">\r\n      </md-input-container>\r\n      <md-input-container color=\"accent\">\r\n        <input mdInput (change)=\"changeDriverLisenceNumber($event)\" placeholder=\"Biển số\">\r\n      </md-input-container>\r\n    </div>\r\n  </div>\r\n</md-dialog-content>\r\n<md-dialog-actions class=\"float-right\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-6\">\r\n      <button color=\"primary\" md-raised-button (click)=addDriver()><md-icon  md-font-set=\"material-icons\">done</md-icon> <strong>Chỉnh sửa</strong></button>\r\n    </div>\r\n    <div class=\"col-md-6\">\r\n      <button md-raised-button (click)=\"close()\"><md-icon  md-font-set=\"material-icons\">close</md-icon><strong> Hủy bỏ</strong></button>\r\n    </div>\r\n  </div>\r\n</md-dialog-actions>"
+module.exports = "<h2 md-dialog-title>Chỉnh sửa thông tin tài xế</h2>\r\n<hr>\r\n<md-dialog-content>\r\n  <div class=\"col-md-12\">\r\n    <div class=\"row align-items-center\">\r\n      <md-input-container color=\"accent\">\r\n        <input type=\"text\" value=\"{{driverObject.name}}\" name=\"name\" mdInput placeholder=\"Tên hiển thị\">\r\n      </md-input-container>\r\n      <md-input-container color=\"accent\">\r\n        <input type=\"email\" value=\"{{driverObject.Email}}\" mdInput placeholder=\"Email\">\r\n      </md-input-container>\r\n    </div>\r\n    <div class=\"row align-items-center\">\r\n      <md-input-container color=\"accent\">\r\n        <input type=\"text\" value=\"{{driverObject.firstName}}\" mdInput placeholder=\"Họ\">\r\n      </md-input-container>\r\n      <md-input-container color=\"accent\">\r\n        <input type=\"text\" value=\"{{driverObject.lastName}}\" mdInput placeholder=\"Tên đệm\">\r\n      </md-input-container>\r\n    </div>\r\n    <div class=\"row align-items-center\">\r\n      <md-input-container color=\"accent\">\r\n        <input type=\"number\" value=\"{{driverObject.age}}\" mdInput placeholder=\"Tuổi\">\r\n      </md-input-container>\r\n      <md-input-container color=\"accent\">\r\n        <input mdInput value=\"{{driverObject.dob}}\" type=\"date\" placeholder=\"Ngày sinh\">\r\n      </md-input-container>\r\n    </div>\r\n    <div class=\"row align-items-center\">\r\n      <md-input-container color=\"accent\">\r\n        <input mdInput value=\"{{driverObject.carName}}\" placeholder=\"Tên xe\">\r\n      </md-input-container>\r\n      <md-input-container color=\"accent\">\r\n        <input mdInput value=\"{{driverObject.licensePlace}}\" placeholder=\"Biển số\">\r\n      </md-input-container>\r\n    </div>\r\n  </div>\r\n</md-dialog-content>\r\n<md-dialog-actions class=\"float-right\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-6\">\r\n      <button color=\"primary\" md-raised-button (click)=editDriver()><md-icon  md-font-set=\"material-icons\">done</md-icon> <strong>Chỉnh sửa</strong></button>\r\n    </div>\r\n    <div class=\"col-md-6\">\r\n      <button md-raised-button (click)=\"close()\"><md-icon  md-font-set=\"material-icons\">close</md-icon><strong> Hủy bỏ</strong></button>\r\n    </div>\r\n  </div>\r\n</md-dialog-actions>"
 
 /***/ }),
 
@@ -1153,6 +1161,8 @@ module.exports = "<h2 md-dialog-title>Chỉnh sửa thông tin tài xế</h2>\r\
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_driverService_index__ = __webpack_require__("../../../../../src/app/services/driverService/index.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__("../../../../angularfire2/database.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DialogeditComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1164,10 +1174,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var DialogeditComponent = (function () {
-    function DialogeditComponent() {
+    function DialogeditComponent(driverService, af) {
+        this.driverService = driverService;
+        this.af = af;
     }
     DialogeditComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        var instantDriver = this.af.object("/drivers/" + this.driverService.idDriver);
+        instantDriver.subscribe(function (item) {
+            _this.driverObject = item;
+        });
     };
     return DialogeditComponent;
 }());
@@ -1177,9 +1196,10 @@ DialogeditComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/dashboard/dialogedit/dialogedit.component.html"),
         styles: [__webpack_require__("../../../../../src/app/dashboard/dialogedit/dialogedit.component.css")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_driverService_index__["a" /* DriverService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_driverService_index__["a" /* DriverService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["b" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["b" /* AngularFireDatabase */]) === "function" && _b || Object])
 ], DialogeditComponent);
 
+var _a, _b;
 //# sourceMappingURL=D:/Final Thesys/trackingAngular2firebase - TEST - Copy - Copy/src/dialogedit.component.js.map
 
 /***/ }),
@@ -1253,9 +1273,10 @@ var DriverComponent = (function () {
         dialogRef.afterClosed().subscribe(function (result) {
         });
     };
-    DriverComponent.prototype.edit = function (key) {
-        console.log(key);
+    DriverComponent.prototype.edit = function (value) {
+        console.log(value);
         var dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_7__dialogedit_index__["a" /* DialogeditComponent */]);
+        this.driverService.idDriver = value;
     };
     DriverComponent.prototype.chat = function () {
         var dialogRef = this.dialog.open(__WEBPACK_IMPORTED_MODULE_6__dialogchat_index__["a" /* DialogchatComponent */]);
@@ -1358,7 +1379,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/driverlist/driverlist.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h4><strong><md-icon>directions_car</md-icon> Danh sách tài xế</strong></h4>\r\n<md-card>\r\n  <!--<md-card-header>\r\n    <h6><strong><md-icon>directions_car</md-icon> Danh sách tài xế</strong></h6>\r\n  </md-card-header>-->\r\n  <hr/>\r\n  <md-card-content>\r\n    <md-nav-list>\r\n      <!--<a (click)=changeDriver(driver) *ngFor=\"let driver of driverCurrents|async\" md-list-item>-->\r\n      <a (click)=changeDriver(driver) *ngFor=\"let driver of driverCurrents\" md-list-item>\r\n        <span><md-icon>account_circle</md-icon>&emsp;&emsp;{{driver.name}}</span>\r\n      </a>\r\n    </md-nav-list>\r\n  </md-card-content>\r\n\r\n</md-card>"
+module.exports = "<h5>\r\n  <md-icon>directions_car</md-icon><strong> Danh sách tài xế</strong>\r\n</h5>\r\n<md-card>\r\n  <!--<hr/>-->\r\n  <md-card-content>\r\n    <md-nav-list style=\"border: 1px solid #e5e5e5; border-radius: 2px\">\r\n      <md-list-item (click)=changeDriver(driver) *ngFor=\"let driver of driverCurrents\">\r\n        <!--<a (click)=changeDriver(driver) *ngFor=\"let driver of driverCurrents|async\" md-list-item>-->\r\n        <!--<a (click)=changeDriver(driver) *ngFor=\"let driver of driverCurrents\">-->\r\n        <div md-card-avatar>\r\n          <md-icon color=\"accent\">account_circle</md-icon>\r\n        </div>\r\n        <span>&emsp;&emsp;{{driver.name}}</span>\r\n        <!--</a>-->\r\n      </md-list-item>\r\n    </md-nav-list>\r\n  </md-card-content>\r\n\r\n</md-card>"
 
 /***/ }),
 
@@ -1392,19 +1413,22 @@ var DriverlistComponent = (function () {
     }
     DriverlistComponent.prototype.ngOnInit = function () {
         var _this = this;
-        if (this.driverCurrents == null) {
-            // this.driverCurrents = this.driverService.getAllDriver();
-            this.driverService.getAllDriver().forEach(function (driver) {
-                var index = 0;
-                driver.forEach(function (element) {
-                    if (element.$key == localStorage.getItem("uid")) {
-                        driver.splice(index, 1);
-                    }
-                    index++;
-                });
-                _this.driverCurrents = driver;
+        // if (this.driverCurrents == null) {
+        // this.driverCurrents = this.driverService.getAllDriver();
+        this.driverService.getAllDriver().forEach(function (driver) {
+            var index = 0;
+            driver.forEach(function (element) {
+                if (element.$key == localStorage.getItem("uid")) {
+                    driver.splice(index, 1);
+                }
+                index++;
             });
-        }
+            _this.driverCurrents = driver;
+            // this.driverService.onPassingDriverID(this.driverCurrents[0].$key);
+            console.log(_this.driverCurrents[0].$key);
+            _this.driverService.passingDriverId(_this.driverCurrents[0].$key);
+        });
+        // }
     };
     DriverlistComponent.prototype.changeDriver = function (driver) {
         // console.log(driver.$key);
@@ -1517,6 +1541,7 @@ module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_driverService_index__ = __webpack_require__("../../../../../src/app/services/driverService/index.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocationComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1529,11 +1554,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var LocationComponent = (function () {
-    function LocationComponent(router) {
+    function LocationComponent(router, driverService) {
         this.router = router;
+        this.driverService = driverService;
     }
     LocationComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        if (this.driverCurrents == null) {
+            // this.driverCurrents = this.driverService.getAllDriver();
+            this.driverService.getAllDriver().forEach(function (driver) {
+                var index = 0;
+                driver.forEach(function (element) {
+                    if (element.$key == localStorage.getItem("uid")) {
+                        driver.splice(index, 1);
+                    }
+                    index++;
+                });
+                _this.driverCurrents = driver;
+                // this.driverService.onPassingDriverID(this.driverCurrents[0].$key);
+                console.log(_this.driverCurrents[0].$key);
+                _this.driverService.passingDriverId(_this.driverCurrents[0].$key);
+            });
+        }
     };
     return LocationComponent;
 }());
@@ -1543,10 +1587,10 @@ LocationComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/dashboard/location/location.component.html"),
         styles: [__webpack_require__("../../../../../src/app/dashboard/location/location.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_driverService_index__["a" /* DriverService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_driverService_index__["a" /* DriverService */]) === "function" && _b || Object])
 ], LocationComponent);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=D:/Final Thesys/trackingAngular2firebase - TEST - Copy - Copy/src/location.component.js.map
 
 /***/ }),
@@ -1590,7 +1634,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "\r\n/*@media(min-width:1200){*/\r\n  .sebm-google-map-container {\r\n    height: 350px;\r\n    width: 680px;\r\n  }\r\n/*}*/\r\n\r\n@media(min-width:1367){\r\n  .sebm-google-map-container {\r\n    height: 550px;\r\n  }\r\n}\r\n\r\n.example-card{\r\n  width: auto;\r\n  height: 30%;\r\n}\r\n", ""]);
+exports.push([module.i, "\r\n/*@media(min-width:1200){*/\r\n  .sebm-google-map-container {\r\n    height: 350px;\r\n    /*width: 680px;*/\r\n  }\r\n/*}*/\r\n\r\n@media(min-width:1367){\r\n  .sebm-google-map-container {\r\n    height: 550px;\r\n  }\r\n}\r\n\r\n.example-card{\r\n  width: auto;\r\n  height: 30%;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1603,7 +1647,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/map/map.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<md-card>\r\n  <!--<md-card-header>\r\n    <h4><strong><md-icon>track_changes</md-icon> Theo dõi lộ trình</strong></h4>\r\n  </md-card-header>-->\r\n  <hr/>\r\n  <div class=\"row\">\r\n  </div>\r\n  <md-card-content>\r\n    <br>\r\n    <div class=\"row\">\r\n      <sebm-google-map [latitude]=\"currentLat\" [longitude]=\"currentLng\" [zoom]=\"19\">\r\n        <sebm-google-map-polyline [strokeWeight]=\"'10'\" [strokeColor]=\"'#B71C1C'\">\r\n          <sebm-google-map-polyline-point *ngFor=\"let geolocationCurrent of geolocationCurrents|async\" [latitude]=\"geolocationCurrent.lat\"\r\n            [longitude]=\"geolocationCurrent.lng\">\r\n          </sebm-google-map-polyline-point>\r\n        </sebm-google-map-polyline>\r\n        <sebm-google-map-circle [latitude]=\"currentLat\" [longitude]=\"currentLng\" [radius]=\"7\" [fillColor]=\"'#1976D2'\" [circleDraggable]=\"false\">\r\n          <sebm-google-map-circle [latitude]=\"currentLat\" [longitude]=\"currentLng\" [radius]=\"4\" [fillColor]=\"'#1976D2'\" [circleDraggable]=\"false\">\r\n            <sebm-google-map-circle [latitude]=\"currentLat\" [longitude]=\"currentLng\" [radius]=\"2\" [fillColor]=\"'#E53935'\" [circleDraggable]=\"false\">\r\n            </sebm-google-map-circle>\r\n          </sebm-google-map-circle>\r\n        </sebm-google-map-circle>\r\n      </sebm-google-map>\r\n    </div>\r\n  </md-card-content>\r\n</md-card>"
+module.exports = "<md-card>\r\n  <!--<md-card-header>\r\n    <h4><strong><md-icon>track_changes</md-icon> Theo dõi lộ trình</strong></h4>\r\n  </md-card-header>-->\r\n  <hr/>\r\n\r\n  <md-card-content>\r\n    <br>\r\n    <sebm-google-map [latitude]=\"currentLat\" [longitude]=\"currentLng\" [zoom]=\"19\">\r\n      <sebm-google-map-polyline [strokeWeight]=\"'10'\" [strokeColor]=\"'#B71C1C'\">\r\n        <sebm-google-map-polyline-point *ngFor=\"let geolocationCurrent of geolocationCurrents|async\" [latitude]=\"geolocationCurrent.lat\"\r\n          [longitude]=\"geolocationCurrent.lng\">\r\n        </sebm-google-map-polyline-point>\r\n      </sebm-google-map-polyline>\r\n      <sebm-google-map-circle [latitude]=\"currentLat\" [longitude]=\"currentLng\" [radius]=\"7\" [fillColor]=\"'#1976D2'\" [circleDraggable]=\"false\">\r\n        <sebm-google-map-circle [latitude]=\"currentLat\" [longitude]=\"currentLng\" [radius]=\"4\" [fillColor]=\"'#1976D2'\" [circleDraggable]=\"false\">\r\n          <sebm-google-map-circle [latitude]=\"currentLat\" [longitude]=\"currentLng\" [radius]=\"2\" [fillColor]=\"'#E53935'\" [circleDraggable]=\"false\">\r\n          </sebm-google-map-circle>\r\n        </sebm-google-map-circle>\r\n      </sebm-google-map-circle>\r\n    </sebm-google-map>\r\n  </md-card-content>\r\n</md-card>"
 
 /***/ }),
 
@@ -1642,36 +1686,7 @@ var MapComponent = (function () {
         this.currentLat = 0;
         this.currentLng = 0;
         this.toastr.setRootViewContainerRef(vcr);
-        // this.geolocationCurrents = af.database.list('/geolocationCurrents')
-        // this.driverCurrents = driverService.getAllDriver();
-        // navigator.geolocation.getCurrentPosition(function (location) {
-        //   this.currentLat = location.coords.latitude;
-        //   this.currentLng = location.coords.longitude;
-        // });
-        // console.log(driverService);
     }
-    // ngOnInit(): void {
-    //   console.log("Da nhay vao onInit");
-    //   this.driverService.onPassingDriverID().subscribe((driverID) => {
-    //     console.log(driverID);
-    //     var driverKey = '/geolocationCurrents/' + driverID;
-    //     console.log(driverKey);
-    //     this.geolocationCurrents = this.af.list(driverKey);
-    //     let positionCurrent = this.af.object(driverKey, { preserveSnapshot: true });
-    //     positionCurrent.subscribe(snapshot => {
-    //       let currentPos = [];
-    //       snapshot.forEach(element => {
-    //         console.log(element);
-    //         currentPos.push(element);
-    //       });
-    //       console.log(currentPos[currentPos.length - 1]);
-    //       this.currentLat = currentPos[currentPos.length - 1].val().lat;
-    //       this.currentLng = currentPos[currentPos.length - 1].val().lng;
-    //       console.log(this.currentLat);
-    //       console.log(this.currentLng);
-    //     })
-    //   })
-    // }
     MapComponent.prototype.ngOnInit = function () {
         var _this = this;
         console.log(this.driverID);
@@ -1715,34 +1730,6 @@ var MapComponent = (function () {
                         showCloseButton: true
                     });
                 }
-                // positionCurrentItem.subscribe(item => {
-                //   console.log(item[0].val());
-                // })
-                // if (snapshot != null) {
-                //   // let currentPos = [];
-                //   // snapshot.forEach(element => {
-                //   //   console.log(element);
-                //   //   currentPos.push(element);
-                //   // });
-                //   try {
-                //     console.log(snapshot[snapshot.length - 1]);
-                //     console.log(snapshot);
-                // this.currentLat = snapshot[snapshot.length - 1].val().lat;
-                // this.currentLng = snapshot[snapshot.length - 1].val().lng;
-                //     console.log(this.currentLat);
-                //     console.log(this.currentLng);
-                //   } catch (error) {
-                //     console.log(error);
-                //     console.log("Da nhay vao catch");
-                //     this.toastr.error("Có gì đó không ổn", "Lỗi", {
-                //       positionClass: 'toast-bottom-right',
-                //       showCloseButton: true
-                //     })
-                //   }
-                // }
-                // else {
-                //   // let dialogRef = this.dialog.open();
-                // }
             });
         });
     };
@@ -1800,7 +1787,7 @@ var MapRoutes = [
 /***/ "../../../../../src/app/dashboard/route/route.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-4\">\r\n      <div>\r\n        <md-list style=\"border: 1px solid #CCCCCC; border-radius: 5px;\" md-scroll-y>\r\n          <h4 align=\"center\" md-header><strong>Danh sách tài xế</strong></h4>\r\n          <md-divider></md-divider>\r\n          <md-nav-list style=\"overflow-y: scroll; overflow-x: hidden;\">\r\n            <md-list-item (click)=changeDriver(driver) *ngFor=\"let driver of driverList\">\r\n              <div class=\"col-md-10 col-sm-9\">\r\n                <h6 md-line><strong> {{driver.name}}</strong></h6>\r\n                <p md-line>Trạng thái 1 </p>\r\n              </div>\r\n              <div class=\"col-md-2 col-sm-3\">\r\n\r\n              </div>\r\n            </md-list-item>\r\n          </md-nav-list>\r\n          <md-divider></md-divider>\r\n        </md-list>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-md-8\">\r\n      <md-input-container>\r\n        <input mdInput [mdDatepicker]=\"picker\" placeholder=\"Chọn ngày..\">\r\n      </md-input-container>\r\n      <button mdSuffix [mdDatepickerToggle]=\"picker\"></button>\r\n      <md-datepicker #picker></md-datepicker>\r\n      <md-select style=\"padding-left:5em\" placeholder=\"Tài xế\" [(ngModel)]=\"selectedValue\" name=\"food\">\r\n        <md-option>\r\n          Tài xế 1\r\n        </md-option>\r\n        <md-option>\r\n          Tài xế 2\r\n        </md-option>\r\n        <md-option>\r\n          Tài xế 3\r\n        </md-option>\r\n      </md-select>\r\n      <div class=\"row\">\r\n        <div class=\"col-md-12\">\r\n          <app-map></app-map>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>"
+module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-3\">\r\n      <div>\r\n        <md-list style=\"border: 1px solid #CCCCCC; border-radius: 5px;\" md-scroll-y>\r\n          <h4 align=\"center\" md-header><strong>Danh sách tài xế</strong></h4>\r\n          <md-divider></md-divider>\r\n          <md-nav-list style=\"overflow-y: scroll; overflow-x: hidden;\">\r\n            <md-list-item (click)=changeDriver(driver) *ngFor=\"let driver of driverList\">\r\n              <div class=\"col-md-10 col-sm-9\">\r\n                <h6 md-line><strong> {{driver.name}}</strong></h6>\r\n                <p md-line>Trạng thái 1 </p>\r\n              </div>\r\n              <div class=\"col-md-2 col-sm-3\">\r\n              </div>\r\n            </md-list-item>\r\n          </md-nav-list>\r\n          <md-divider></md-divider>\r\n        </md-list>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-md-3\">\r\n      <div>\r\n        <md-list style=\"border: 1px solid #CCCCCC; border-radius: 5px; \" md-scroll-y>\r\n          <h4 align=\"center\" md-header><strong>Thời gian</strong></h4>\r\n          <md-divider></md-divider>\r\n          <md-nav-list style=\"overflow-y: scroll; overflow-x: hidden;\">\r\n            <md-list-item (click)=changeDate(date) *ngFor=\"let date of dateList\">\r\n              <div class=\"col-md-10 col-sm-9\">\r\n                <h6 md-line><strong> {{date.$key|date }}</strong></h6>\r\n                <p md-line>{{ date.$key | date:'shortTime' }} </p>\r\n              </div>\r\n              <div class=\"col-md-2 col-sm-3\">\r\n              </div>\r\n            </md-list-item>\r\n          </md-nav-list>\r\n          <md-divider></md-divider>\r\n        </md-list>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-md-6\">\r\n      <h5 ([ngModel])=\"driverName\">Tài xế: {{driverName}}</h5>\r\n      <sebm-google-map [latitude]=\"currentLat\" [longitude]=\"currentLng\" [zoom]=\"19\">\r\n        <sebm-google-map-polyline [strokeWeight]=\"'10'\" [strokeColor]=\"'#B71C1C'\">\r\n          <sebm-google-map-polyline-point *ngFor=\"let geolocationCurrent of geolocationCurrents\" [latitude]=\"geolocationCurrent.lat\"\r\n            [longitude]=\"geolocationCurrent.lng\">\r\n          </sebm-google-map-polyline-point>\r\n        </sebm-google-map-polyline>\r\n      </sebm-google-map>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -1812,7 +1799,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "ng2-datepicker {\n  position: fixed;\n  float: right; }\n", ""]);
+exports.push([module.i, "ng2-datepicker {\n  position: fixed;\n  float: right; }\n\nmd-nav-list {\n  height: 350px; }\n\nsebm-google-map {\n  height: 350px; }\n", ""]);
 
 // exports
 
@@ -1829,7 +1816,6 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__("../../../../angularfire2/database.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_driverService_index__ = __webpack_require__("../../../../../src/app/services/driverService/index.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_datepicker__ = __webpack_require__("../../../../ng2-datepicker/lib-dist/ng2-datepicker.module.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RouteComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1843,17 +1829,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var RouteComponent = (function () {
     function RouteComponent(af, driverService) {
         this.af = af;
         this.driverService = driverService;
         this.driverService = driverService;
         // this.driverList = driverService.getAllDriver();
-        this.options = new __WEBPACK_IMPORTED_MODULE_3_ng2_datepicker__["b" /* DatePickerOptions */]();
+        // this.options = new DatePickerOptions();
     }
     RouteComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.selectedDate = new Date();
         this.driverService.getAllDriver().forEach(function (driver) {
             var index = 0;
             driver.forEach(function (element) {
@@ -1865,8 +1851,49 @@ var RouteComponent = (function () {
             _this.driverList = driver;
         });
     };
+    RouteComponent.prototype.onChange = function ($event) {
+        // console.log(this.formatDate($event));
+        console.log((new Date($event).getTime() / 1000));
+        // var dateTime = new Date(1498294462857);
+        var dateTime = new Date(($event).getTime() / 1000);
+        console.log(dateTime.toLocaleDateString());
+    };
     RouteComponent.prototype.changeDriver = function (driver) {
-        console.log(driver.$key);
+        var _this = this;
+        this.driverKey = driver.$key;
+        var resultDateList = this.af.list("geolocationCurrents/" + driver.$key, {
+            query: {
+                orderByChild: 'timestamp'
+            }
+        });
+        resultDateList.forEach(function (item) {
+            _this.dateList = item;
+            _this.dateList.forEach(function (resultItem) {
+                resultItem = new Date(resultItem);
+            });
+        });
+    };
+    RouteComponent.prototype.changeDate = function (value) {
+        var _this = this;
+        var resultDriver = this.af.object("drivers/" + this.driverKey);
+        resultDriver.subscribe(function (item) {
+            _this.driverName = item.name;
+        });
+        this.geolocationCurrents = Object.keys(value).map(function (key) { return value[key]; });
+        console.log(this.geolocationCurrents.length);
+        this.currentLat = this.geolocationCurrents[this.geolocationCurrents.length - 1].lat;
+        this.currentLng = this.geolocationCurrents[this.geolocationCurrents.length - 1].lng;
+        console.log(this.geolocationCurrents);
+    };
+    RouteComponent.prototype.formatDate = function (date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
     };
     return RouteComponent;
 }());
@@ -2054,7 +2081,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".example-form {\r\n  width: 500px;\r\n}\r\n\r\n.example-card {\r\n  width: 400px;\r\n}\r\n\r\n\r\n.full-width-input {\r\n  width: 80%;\r\n}\r\n\r\nbody {\r\n  background-image: url(\"http://hdqwalls.com/wallpapers/material-design-4k.jpg\");\r\n}", ""]);
+exports.push([module.i, ".example-form {\r\n  width: 500px;\r\n}\r\n\r\n.example-card {\r\n  width: 400px;\r\n}\r\n\r\n\r\n.full-width-input {\r\n  width: 80%;\r\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -2266,6 +2293,11 @@ var DriverService = (function () {
         console.log('/drivers/' + this.idDriver.toString());
         var newDriver = this.af.object('/drivers/' + this.idDriver);
         newDriver.set(driver);
+    };
+    DriverService.prototype.editDriver = function (driver, idDriver) {
+        console.log('/drivers/' + this.idDriver.toString());
+        var newDriver = this.af.object('/drivers/' + this.idDriver);
+        newDriver.update(driver);
     };
     DriverService.prototype.removeDriver = function () {
         this.currentDriver.remove(this.idDriver);
