@@ -10,7 +10,7 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-3">
-                                       <div id="avatar"></div>
+                                        <div id="avatar"></div>
                                     </div>
                                     <div class="col-md-7">
                                         <h6 md-line><strong>{{driver.name}}</strong></h6>
@@ -29,6 +29,7 @@
             </div>
         </div>
         <div class="col-md-8">
+            <h4 [(ngModel)]="driverNameCurrent">{{driverNameCurrent}}</h4>
             <div class="content-chat">
                 <app-messagebubble [data]="messages"></app-messagebubble>
             </div>

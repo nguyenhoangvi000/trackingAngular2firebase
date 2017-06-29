@@ -25,20 +25,23 @@ export class DriverlistComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.driverCurrents == null) {
-      // this.driverCurrents = this.driverService.getAllDriver();
-      this.driverService.getAllDriver().forEach(driver => {
-        let index = 0;
-        driver.forEach(element => {
-          if (element.$key == localStorage.getItem("uid")) {
-            driver.splice(index, 1);
-          }
-          index++;
-        })
-
-        this.driverCurrents = driver;
+    // if (this.driverCurrents == null) {
+    // this.driverCurrents = this.driverService.getAllDriver();
+    this.driverService.getAllDriver().forEach(driver => {
+      let index = 0;
+      driver.forEach(element => {
+        if (element.$key == localStorage.getItem("uid")) {
+          driver.splice(index, 1);
+        }
+        index++;
       })
-    }
+
+      this.driverCurrents = driver;
+      // this.driverService.onPassingDriverID(this.driverCurrents[0].$key);
+      console.log(this.driverCurrents[0].$key);
+      this.driverService.passingDriverId(this.driverCurrents[0].$key);
+    })
+    // }
   }
 
   changeDriver(driver) {

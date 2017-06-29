@@ -18,6 +18,7 @@ export class ChatComponent implements OnInit {
     messagesReverse: FirebaseListObservable<any[]>;
     messageValue: String = "";
     uidCurrent: String = "";
+    driverNameCurrent: String;
 
     driverList: any[];
 
@@ -39,6 +40,11 @@ export class ChatComponent implements OnInit {
             })
 
             this.driverList = driver;
+
+            console.log(this.driverList[1].$key);
+            this.uidCurrent = "/messages/" + this.localStorage.get("uid") + "/" + this.driverList[1].$key;
+            this.messages = this.af.list(this.uidCurrent.toString());
+            this.messagesReverse = this.af.list("/messages/" + this.driverList[1].$key + "/" + this.localStorage.get("uid"));
         })
     }
 
@@ -67,7 +73,10 @@ export class ChatComponent implements OnInit {
     changeDriver(driver) {
 
         this.uidCurrent = "/messages/" + this.localStorage.get("uid") + "/" + driver.$key;
-        console.log(this.uidCurrent);
+        const driverNameCurrent = this.af.object("drivers/" + driver.$key);
+        driverNameCurrent.subscribe(item => {
+            this.driverNameCurrent = item.name;
+        })
         this.messages = this.af.list(this.uidCurrent.toString());
         this.messagesReverse = this.af.list("/messages/" + driver.$key + "/" + this.localStorage.get("uid"));
 

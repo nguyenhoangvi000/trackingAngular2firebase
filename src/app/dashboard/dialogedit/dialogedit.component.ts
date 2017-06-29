@@ -20,11 +20,9 @@ export class DialogeditComponent implements OnInit {
 
   ngOnInit() {
     const instantDriver = this.af.object("/drivers/" + this.driverService.idDriver);
-    // this.driverObject = instantDriver;
     instantDriver.subscribe(item => {
       this.driverObject = item;
     })
-    // console.log(this.driverObject);
   }
 
 

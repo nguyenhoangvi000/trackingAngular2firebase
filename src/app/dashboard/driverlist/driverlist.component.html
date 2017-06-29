@@ -1,15 +1,19 @@
-<h4><strong><md-icon>directions_car</md-icon> Danh sách tài xế</strong></h4>
+<h5>
+  <md-icon>directions_car</md-icon><strong> Danh sách tài xế</strong>
+</h5>
 <md-card>
-  <!--<md-card-header>
-    <h6><strong><md-icon>directions_car</md-icon> Danh sách tài xế</strong></h6>
-  </md-card-header>-->
-  <hr/>
+  <!--<hr/>-->
   <md-card-content>
-    <md-nav-list>
-      <!--<a (click)=changeDriver(driver) *ngFor="let driver of driverCurrents|async" md-list-item>-->
-      <a (click)=changeDriver(driver) *ngFor="let driver of driverCurrents" md-list-item>
-        <span><md-icon>account_circle</md-icon>&emsp;&emsp;{{driver.name}}</span>
-      </a>
+    <md-nav-list style="border: 1px solid #e5e5e5; border-radius: 2px">
+      <md-list-item (click)=changeDriver(driver) *ngFor="let driver of driverCurrents">
+        <!--<a (click)=changeDriver(driver) *ngFor="let driver of driverCurrents|async" md-list-item>-->
+        <!--<a (click)=changeDriver(driver) *ngFor="let driver of driverCurrents">-->
+        <div md-card-avatar>
+          <md-icon color="accent">account_circle</md-icon>
+        </div>
+        <span>&emsp;&emsp;{{driver.name}}</span>
+        <!--</a>-->
+      </md-list-item>
     </md-nav-list>
   </md-card-content>
 
