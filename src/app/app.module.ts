@@ -33,7 +33,7 @@ import { DriverlistComponent } from './dashboard/driverlist/index';
 import { LocationComponent } from './dashboard/location/location.component';
 import { AboutComponent } from './dashboard/about/about.component';
 import { RouteComponent } from './dashboard/route/route.component';
-// import { TopnavComponent } from './dashboard/topnav/topnav.component';
+import { TopnavComponent } from './dashboard/topnav/topnav.component';
 import { DialogComponent } from './dashboard/dialog/index';
 import { DialogeditComponent } from './dashboard/dialogedit/index';
 import { DialogconfirmComponent } from './dashboard/dialogconfirm/index';
@@ -62,6 +62,7 @@ import { routes } from './app.routes';
     DialogchatComponent,
     MapComponent,
     SidenavComponent,
+    TopnavComponent,
     LoginComponent,
     RouteComponent,
     DashboardComponent,

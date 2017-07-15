@@ -18,7 +18,7 @@ import { ChatModule } from './chat/chat.module';
 
 import { SidenavComponent } from './sidenav/index';
 import { ChatComponent } from './chat/index';
-import { TopnavComponent } from './topnav/topnav.component';
+// import { TopnavComponent } from './topnav/topnav.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { LocationComponent } from './location/index';
 import { DriverlistComponent } from './driverlist/driverlist.component';
@@ -41,7 +41,7 @@ import { RouteComponent } from './route/route.component';
     ],
     entryComponents: [DialogComponent],
     // declarations: [TopnavComponent, LocationComponent, DriverlistComponent, DialogeditComponent, RouteComponent, ChatComponent]
-    declarations: [TopnavComponent]
+    // declarations: [TopnavComponent]
 })
 
 export class DashboardModule { }

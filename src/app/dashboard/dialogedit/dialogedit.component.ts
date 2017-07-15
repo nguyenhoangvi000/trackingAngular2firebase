@@ -13,7 +13,7 @@ import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseObjectObservabl
 export class DialogeditComponent implements OnInit {
 
 
-  driverObject: FirebaseObjectObservable<any>;
+  driverObject: Driver;
 
 
   constructor(private driverService: DriverService, private af: AngularFireDatabase) { }
@@ -25,27 +25,33 @@ export class DialogeditComponent implements OnInit {
     })
   }
 
+  editDriver() {
 
+  }
 
-  // export class Driver {
-  //   name: string;
-  //   age: number;
-  //   licensePlace: string;
-  //   role: string;
-  //   status: boolean;
-  //   firstName: string;
-  //   lastName: string;
-  //   lastestMessage: string;
-  //   dob: Date;
-  //   carName: string;
-  //   Email: string;
+  close() {
 
-  //   constructor(values: Object = {}) {
-  //     Object.assign(this, values);
-  //   }
+  }
+}
 
-  //   getNameValue(): string {
-  //     return this.name;
-  //   }
+export class Driver {
+  name: string;
+  age: number;
+  licensePlace: string;
+  role: string;
+  status: boolean;
+  firstName: string;
+  lastName: string;
+  lastestMessage: string;
+  dob: Date;
+  carName: string;
+  Email: string;
 
+  constructor(values: Object = {}) {
+    Object.assign(this, values);
+  }
+
+  getNameValue(): string {
+    return this.name;
+  }
 }
