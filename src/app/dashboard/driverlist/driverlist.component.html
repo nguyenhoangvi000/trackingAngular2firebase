@@ -3,15 +3,18 @@
 </h5>
 <md-card>
   <!--<hr/>-->
+  <md-input-container color="accent">
+    <input #textName mdInput placeholder="Tìm kiếm tài xế">
+  </md-input-container>
   <md-card-content>
     <md-nav-list style="border: 1px solid #e5e5e5; border-radius: 2px">
-      <md-list-item (click)=changeDriver(driver) *ngFor="let driver of driverCurrents">
+      <md-list-item (click)=changeDriver(driver) *ngFor="let driver of driverCurrents | searchfilter: textName.value">
         <!--<a (click)=changeDriver(driver) *ngFor="let driver of driverCurrents|async" md-list-item>-->
         <!--<a (click)=changeDriver(driver) *ngFor="let driver of driverCurrents">-->
         <div md-card-avatar>
           <md-icon color="accent">account_circle</md-icon>
         </div>
-        <span>&emsp;&emsp;{{driver.name}}</span>
+        <span>&emsp;&emsp;<strong>{{driver.name}}</strong></span>
         <!--</a>-->
       </md-list-item>
     </md-nav-list>

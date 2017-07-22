@@ -1,12 +1,19 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
+      <md-input-container color="accent">
+        <input #textName mdInput placeholder="Tìm kiếm tài xế">
+      </md-input-container>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
       <div>
         <md-list style="border: 1px solid #CCCCCC; border-radius: 5px;" md-scroll-y>
           <h4 align="center" md-header><strong>Danh sách tài xế</strong></h4>
           <md-divider></md-divider>
           <md-nav-list style="overflow-y: scroll; overflow-x: hidden;">
-            <md-list-item (click)=changeDriver(driver) *ngFor="let driver of driverList">
+            <md-list-item (click)=changeDriver(driver) *ngFor="let driver of driverList| searchfilter: textName.value">
               <div class="col-md-10 col-sm-9">
                 <h6 md-line><strong> {{driver.name}}</strong></h6>
                 <p md-line>Trạng thái 1 </p>

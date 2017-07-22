@@ -43,6 +43,8 @@ import { DriverService } from './services/driverService/driver.service';
 import { UserService } from './services/userService/user.service';
 import { MapService } from './services/mapService/map.service';
 
+import { SearchFilterPipe } from './pipes/namePipe';
+
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Ng2DropdownModule } from 'ng2-material-dropdown';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
@@ -71,7 +73,8 @@ import { routes } from './app.routes';
     MessagebubbleComponent,
     AboutComponent,
     LocationComponent,
-    DriverlistComponent
+    DriverlistComponent,
+    SearchFilterPipe
   ],
 
   imports: [
